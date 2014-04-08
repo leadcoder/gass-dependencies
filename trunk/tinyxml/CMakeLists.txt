@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 set(LIB_NAME tinyxml)
 set(LIB_TYPE STATIC)
 project(${LIB_NAME})
+
 set(SHARED_LIB_EXT so)
 if(WIN32)
 	set(SHARED_LIB_EXT dll)
@@ -29,6 +30,7 @@ add_library(
 
 INSTALL( FILES tinyxml.h tinystr.h DESTINATION include/ )
 #INSTALL( FILES lib/debug/tinyxml.${SHARED_LIB_EXT} DESTINATION lib/ )
+if(WIN32)
 install(TARGETS ${LIB_NAME}
   RUNTIME DESTINATION bin/debug CONFIGURATIONS Debug
   LIBRARY DESTINATION bin/debug CONFIGURATIONS Debug
@@ -40,3 +42,10 @@ install(TARGETS ${LIB_NAME}
   LIBRARY DESTINATION bin/release CONFIGURATIONS Release
   ARCHIVE DESTINATION lib/release CONFIGURATIONS Release
   )
+else()
+install(TARGETS ${LIB_NAME}
+  RUNTIME DESTINATION bin 
+  LIBRARY DESTINATION bin 
+  ARCHIVE DESTINATION lib 
+  )
+endif()
