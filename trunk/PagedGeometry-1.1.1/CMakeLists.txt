@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 2.6)
+set(LIB_NAME PagedGeometry)
+set(LIB_TYPE STATIC)
+
+project(${LIB_NAME})
+set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
+#add_definitions()
+set(OGRE_DIR $ENV{OGRE_HOME} CACHE PATH "Ogre 3D folder")
+set(BOOST_DIR $ENV{BOOST_HOME} CACHE PATH "Boost folder")
+set (OGRE_SDK_INCLUDE_DIRS "${OGRE_DIR}/include/OGRE"
+		"${OGRE_DIR}/include/OGRE/Plugins/OctreeSceneManager")
+
+set(LIBRARY_OUTPUT_PATH lib/${CMAKE_BUILD_TYPE})
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include 
+	${CMAKE_CURRENT_SOURCE_DIR}/source 
+	${OGRE_SDK_INCLUDE_DIRS}
+	${BOOST_DIR})
+
+file(GLOB_RECURSE SOURCE_FILES_CPP ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+file(GLOB SOURCE_FILES_H ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
+set(ALL_SOURCE_FILES ${SOURCE_FILES_CPP} ${SOURCE_FILES_H})
+
+add_library(
+	${LIB_NAME}
+	${LIB_TYPE}
+	${ALL_SOURCE_FILES}
+)
+
+#SET_TARGET_PROPERTIES (tinyxml PROPERTIES DEFINE_SYMBOL  "EXPORT" )
+INSTALL( FILES ${SOURCE_FILES_H} DESTINATION include/ )
+install(TARGETS ${LIB_NAME}
+  RUNTIME DESTINATION bin/debug CONFIGURATIONS Debug
+  LIBRARY DESTINATION bin/debug CONFIGURATIONS Debug
+  ARCHIVE DESTINATION lib/debug CONFIGURATIONS Debug
+  )
+
+install(TARGETS ${LIB_NAME}
+  RUNTIME DESTINATION bin/release CONFIGURATIONS Release
+  LIBRARY DESTINATION bin/release CONFIGURATIONS Release
+  ARCHIVE DESTINATION lib/release CONFIGURATIONS Release
+  )
