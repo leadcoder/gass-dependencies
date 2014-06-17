@@ -1,0 +1,281 @@
+Build log nav_test.obj:
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               3.33ms  (31.8%)
+- Build Compact:           0.86ms  (8.2%)
+- Filter Border:           0.79ms  (7.6%)
+- Filter Walkable:         0.05ms  (0.5%)
+- Erode Area:              0.86ms  (8.2%)
+- Build Distance Field:    1.23ms  (11.8%)
+    - Distance:            0.76ms  (7.3%)
+    - Blur:                0.46ms  (4.4%)
+- Build Regions:           1.47ms  (14.0%)
+    - Watershed:           1.32ms  (12.6%)
+      - Expand:            0.65ms  (6.2%)
+      - Find Basins:       0.55ms  (5.3%)
+    - Filter:              0.14ms  (1.3%)
+- Build Contours:          0.37ms  (3.5%)
+    - Trace:               0.28ms  (2.7%)
+    - Simplify:            0.02ms  (0.2%)
+- Build Polymesh:          0.12ms  (1.1%)
+- Build Polymesh Detail:   0.67ms  (6.4%)
+=== TOTAL:                 10.46ms
+>> Polymesh: 4 vertices  1 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               7.15ms  (34.4%)
+- Build Compact:           1.47ms  (7.1%)
+- Filter Border:           1.79ms  (8.6%)
+- Filter Walkable:         0.08ms  (0.4%)
+- Erode Area:              2.06ms  (9.9%)
+- Build Distance Field:    2.70ms  (13.0%)
+    - Distance:            2.05ms  (9.8%)
+    - Blur:                0.62ms  (3.0%)
+- Build Regions:           2.57ms  (12.3%)
+    - Watershed:           2.32ms  (11.2%)
+      - Expand:            1.33ms  (6.4%)
+      - Find Basins:       0.88ms  (4.2%)
+    - Filter:              0.20ms  (0.9%)
+- Build Contours:          0.69ms  (3.3%)
+    - Trace:               0.58ms  (2.8%)
+    - Simplify:            0.02ms  (0.1%)
+- Build Polymesh:          0.17ms  (0.8%)
+- Build Polymesh Detail:   1.29ms  (6.2%)
+=== TOTAL:                 20.80ms
+>> Polymesh: 4 vertices  1 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               8.45ms  (36.6%)
+- Build Compact:           1.62ms  (7.0%)
+- Filter Border:           1.88ms  (8.1%)
+- Filter Walkable:         0.08ms  (0.4%)
+- Erode Area:              2.21ms  (9.6%)
+- Build Distance Field:    3.01ms  (13.0%)
+    - Distance:            2.29ms  (9.9%)
+    - Blur:                0.71ms  (3.1%)
+- Build Regions:           2.93ms  (12.7%)
+    - Watershed:           2.63ms  (11.4%)
+      - Expand:            1.59ms  (6.9%)
+      - Find Basins:       0.93ms  (4.0%)
+    - Filter:              0.22ms  (1.0%)
+- Build Contours:          0.93ms  (4.0%)
+    - Trace:               0.80ms  (3.5%)
+    - Simplify:            0.02ms  (0.1%)
+- Build Polymesh:          0.15ms  (0.7%)
+- Build Polymesh Detail:   1.12ms  (4.8%)
+=== TOTAL:                 23.13ms
+>> Polymesh: 4 vertices  1 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               5.14ms  (31.9%)
+- Build Compact:           1.08ms  (6.7%)
+- Filter Border:           1.32ms  (8.2%)
+- Filter Walkable:         0.07ms  (0.4%)
+- Erode Area:              1.88ms  (11.7%)
+- Build Distance Field:    2.02ms  (12.5%)
+    - Distance:            1.33ms  (8.3%)
+    - Blur:                0.67ms  (4.2%)
+- Build Regions:           2.06ms  (12.8%)
+    - Watershed:           1.84ms  (11.5%)
+      - Expand:            1.02ms  (6.3%)
+      - Find Basins:       0.71ms  (4.4%)
+    - Filter:              0.17ms  (1.1%)
+- Build Contours:          0.78ms  (4.9%)
+    - Trace:               0.65ms  (4.1%)
+    - Simplify:            0.04ms  (0.2%)
+- Build Polymesh:          0.13ms  (0.8%)
+- Build Polymesh Detail:   0.94ms  (5.8%)
+=== TOTAL:                 16.09ms
+>> Polymesh: 4 vertices  1 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               6.42ms  (36.9%)
+- Build Compact:           0.80ms  (4.6%)
+- Filter Border:           2.14ms  (12.3%)
+- Filter Walkable:         0.06ms  (0.3%)
+- Erode Area:              2.14ms  (12.3%)
+- Build Distance Field:    2.34ms  (13.4%)
+    - Distance:            1.96ms  (11.3%)
+    - Blur:                0.37ms  (2.1%)
+- Build Regions:           1.25ms  (7.2%)
+    - Watershed:           1.08ms  (6.2%)
+      - Expand:            0.51ms  (2.9%)
+      - Find Basins:       0.47ms  (2.7%)
+    - Filter:              0.14ms  (0.8%)
+- Build Contours:          0.71ms  (4.1%)
+    - Trace:               0.60ms  (3.4%)
+    - Simplify:            0.02ms  (0.1%)
+- Build Polymesh:          0.13ms  (0.8%)
+- Build Polymesh Detail:   0.59ms  (3.4%)
+=== TOTAL:                 17.41ms
+>> Polymesh: 4 vertices  1 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               12.69ms (30.9%)
+- Build Compact:           3.13ms  (7.6%)
+- Filter Border:           1.97ms  (4.8%)
+- Filter Walkable:         0.09ms  (0.2%)
+- Erode Area:              3.69ms  (9.0%)
+- Build Distance Field:    5.89ms  (14.4%)
+    - Distance:            4.93ms  (12.0%)
+    - Blur:                0.95ms  (2.3%)
+- Build Regions:           7.10ms  (17.3%)
+    - Watershed:           5.75ms  (14.0%)
+      - Expand:            3.41ms  (8.3%)
+      - Find Basins:       2.20ms  (5.4%)
+    - Filter:              1.29ms  (3.2%)
+- Build Contours:          0.89ms  (2.2%)
+    - Trace:               0.78ms  (1.9%)
+    - Simplify:            0.01ms  (0.0%)
+- Build Polymesh:          0.11ms  (0.3%)
+- Build Polymesh Detail:   3.17ms  (7.7%)
+=== TOTAL:                 41.01ms
+>> Polymesh: 6 vertices  3 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               12.04ms (32.9%)
+- Build Compact:           2.74ms  (7.5%)
+- Filter Border:           2.30ms  (6.3%)
+- Filter Walkable:         0.10ms  (0.3%)
+- Erode Area:              5.05ms  (13.8%)
+- Build Distance Field:    4.33ms  (11.8%)
+    - Distance:            3.34ms  (9.1%)
+    - Blur:                0.92ms  (2.5%)
+- Build Regions:           4.85ms  (13.2%)
+    - Watershed:           4.57ms  (12.5%)
+      - Expand:            2.93ms  (8.0%)
+      - Find Basins:       1.11ms  (3.0%)
+    - Filter:              0.24ms  (0.6%)
+- Build Contours:          1.48ms  (4.0%)
+    - Trace:               0.74ms  (2.0%)
+    - Simplify:            0.02ms  (0.1%)
+- Build Polymesh:          0.20ms  (0.6%)
+- Build Polymesh Detail:   2.44ms  (6.6%)
+=== TOTAL:                 36.65ms
+>> Polymesh: 8 vertices  4 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               8.26ms  (30.6%)
+- Build Compact:           2.13ms  (7.9%)
+- Filter Border:           2.81ms  (10.4%)
+- Filter Walkable:         0.10ms  (0.4%)
+- Erode Area:              2.94ms  (10.9%)
+- Build Distance Field:    2.87ms  (10.7%)
+    - Distance:            1.73ms  (6.4%)
+    - Blur:                1.12ms  (4.1%)
+- Build Regions:           3.74ms  (13.9%)
+    - Watershed:           3.48ms  (12.9%)
+      - Expand:            2.55ms  (9.4%)
+      - Find Basins:       0.79ms  (2.9%)
+    - Filter:              0.20ms  (0.7%)
+- Build Contours:          0.66ms  (2.4%)
+    - Trace:               0.55ms  (2.0%)
+    - Simplify:            0.01ms  (0.1%)
+- Build Polymesh:          0.09ms  (0.3%)
+- Build Polymesh Detail:   2.48ms  (9.2%)
+=== TOTAL:                 26.96ms
+>> Polymesh: 4 vertices  1 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               6.19ms  (41.8%)
+- Build Compact:           2.06ms  (13.9%)
+- Filter Border:           0.64ms  (4.3%)
+- Filter Walkable:         0.05ms  (0.3%)
+- Erode Area:              0.81ms  (5.5%)
+- Build Distance Field:    1.46ms  (9.8%)
+    - Distance:            1.19ms  (8.1%)
+    - Blur:                0.25ms  (1.7%)
+- Build Regions:           1.02ms  (6.9%)
+    - Watershed:           0.86ms  (5.8%)
+      - Expand:            0.38ms  (2.5%)
+      - Find Basins:       0.39ms  (2.6%)
+    - Filter:              0.13ms  (0.9%)
+- Build Contours:          0.36ms  (2.4%)
+    - Trace:               0.27ms  (1.8%)
+    - Simplify:            0.02ms  (0.2%)
+- Build Polymesh:          0.64ms  (4.3%)
+- Build Polymesh Detail:   0.77ms  (5.2%)
+=== TOTAL:                 14.80ms
+>> Polymesh: 5 vertices  2 polygons
+Building navigation:
+ - 42 x 42 cells
+ - 0.9K verts, 1.6K tris
+Build Times
+- Rasterize:               6.41ms  (37.4%)
+- Build Compact:           1.24ms  (7.2%)
+- Filter Border:           0.93ms  (5.4%)
+- Filter Walkable:         0.06ms  (0.3%)
+- Erode Area:              1.40ms  (8.2%)
+- Build Distance Field:    2.34ms  (13.7%)
+    - Distance:            1.87ms  (10.9%)
+    - Blur:                0.45ms  (2.6%)
+- Build Regions:           1.43ms  (8.3%)
+    - Watershed:           1.24ms  (7.2%)
+      - Expand:            0.64ms  (3.7%)
+      - Find Basins:       0.50ms  (2.9%)
+    - Filter:              0.16ms  (0.9%)
+- Build Contours:          0.65ms  (3.8%)
+    - Trace:               0.51ms  (3.0%)
+    - Simplify:            0.02ms  (0.1%)
+- Build Polymesh:          0.13ms  (0.8%)
+- Build Polymesh Detail:   0.73ms  (4.3%)
+=== TOTAL:                 17.15ms
+>> Polymesh: 5 vertices  2 polygons
+Building navigation:
+ - 42 x 4
+pi  40.241131 7.930483 22.440338  46.695362 4.338672 5.760155  0xffef 0x0
+ps  40.241131 7.930483 22.440338  46.695362 4.338672 5.760155  0xffef 0x0
