@@ -1,17 +1,3 @@
-/****************************************************************************
-*                                                                           *
-* GAL                                                                       *
-* Copyright (C)2008 - 2013 SWEDISH DEFENCE RESEARCH AGENCY (FOI)            *
-* Author: Johan Hedström                                                    *
-* Email: johan.hedstrom@foi.se                                              *
-*                                                                           *
-* GAL is only used with knowledge from the author. This software            *
-* is not allowed to redistribute without permission from the author.        *
-* For further license information, please turn to contact author.           *
-*                                                                           *
-*                                                                           *
-*****************************************************************************/ 
-
 #pragma once
 
 class dtNavMesh;
