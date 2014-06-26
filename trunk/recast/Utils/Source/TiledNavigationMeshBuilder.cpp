@@ -1,18 +1,3 @@
-/****************************************************************************
-*                                                                           *
-* GAL                                                                       *
-* Copyright (C)2008 - 2013 SWEDISH DEFENCE RESEARCH AGENCY (FOI)            *
-* Author: Johan Hedström                                                    *
-* Email: johan.hedstrom@foi.se                                              *
-*                                                                           *
-* GAL is only used with knowledge from the author. This software            *
-* is not allowed to redistribute without permission from the author.        *
-* For further license information, please turn to contact author.           *
-*                                                                           *
-*                                                                           *
-*****************************************************************************/ 
-
-
 #include "TiledNavigationMeshBuilder.h"
 #include "Recast.h"
 #include "RecastAlloc.h"
@@ -148,6 +133,13 @@ dtNavMesh* TiledNavigationMeshBuilder::Build(InputGeom* geom)
 			tileBmax[2] = bmin[2] + (y+1)*tcs;
 
 			int dataSize = 0;
+
+			m_Ctx->log(RC_LOG_PROGRESS, "Building navigation tile: %d x %d of %d x %d",x,y,tw,th);
+
+			const float current_tile = x + y*tw;
+			const float total_tiles = th + th*tw;
+			m_Ctx->log(RC_LOG_PROGRESS, "Progress: %.2f%%",100.0f*(current_tile / total_tiles));
+
 			unsigned char* data = BuildTileMesh(geom, x, y, tileBmin, tileBmax, dataSize);
 			if (data)
 			{
@@ -214,7 +206,7 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 	// Start the build process.
 	m_Ctx->startTimer(RC_TIMER_TOTAL);
 
-	m_Ctx->log(RC_LOG_PROGRESS, "Building navigation:");
+	//m_Ctx->log(RC_LOG_PROGRESS, "Building navigation tile: %d x %d",tx,ty);
 	m_Ctx->log(RC_LOG_PROGRESS, " - %d x %d cells", cfg.width, cfg.height);
 	m_Ctx->log(RC_LOG_PROGRESS, " - %.1fK verts, %.1fK tris", nverts/1000.0f, ntris/1000.0f);
 
@@ -265,7 +257,7 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 		rcMarkWalkableTriangles(m_Ctx, cfg.walkableSlopeAngle,
 			verts, nverts, ctris, nctris, triareas);
 
-		//Hack to get areas from orginal mesh to chunky mesh
+		//Hack to get areas from original mesh to chunky mesh
 		const int *mesh_areas =  geom->getMesh()->getAreas();
 		for (int j = 0; j < nctris; ++j)
 		{
