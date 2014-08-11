@@ -33,7 +33,7 @@ namespace Hydrax
 
 	/** Decal class.
 	 */
-	class DllExport Decal
+	class HydraxDllExport Decal
 	{
 	public:
 		/** Constructor
@@ -193,7 +193,7 @@ namespace Hydrax
 	/** Decals manager class. Use it for place any kind of texture
 	    over the water! Like ship trails, overwater vegetables, ...
 	 */
-	class DllExport DecalsManager
+	class HydraxDllExport DecalsManager
 	{
 	public:
 		/** Constructor

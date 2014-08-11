@@ -35,7 +35,7 @@ namespace Hydrax{ namespace Module
 {
 	/** Hydrax radial grid module
 	 */
-	class DllExport RadialGrid : public Module
+	class HydraxDllExport RadialGrid : public Module
 	{
 	public:
 		/** Struct wich contains Hydrax simple grid module options

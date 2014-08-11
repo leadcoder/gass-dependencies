@@ -35,7 +35,7 @@ namespace Hydrax
 
 	/** Material/Shader manager class
 	 */
-	class DllExport MaterialManager
+	class HydraxDllExport MaterialManager
 	{
 	public:
 		/** Material type enum

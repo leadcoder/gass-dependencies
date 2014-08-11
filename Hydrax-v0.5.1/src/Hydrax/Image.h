@@ -33,7 +33,7 @@ namespace Hydrax
 {
 	/** Class for store variable channels of an image 
 	 */
-	class DllExport Image
+	class HydraxDllExport Image
 	{
 	public:
 		/** Image type enum

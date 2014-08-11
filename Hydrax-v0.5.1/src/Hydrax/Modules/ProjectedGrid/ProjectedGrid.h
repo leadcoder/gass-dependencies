@@ -41,7 +41,7 @@ namespace Hydrax{ namespace Module
 {
 	/** Hydrax projected grid module
 	 */
-	class DllExport ProjectedGrid : public Module
+	class HydraxDllExport ProjectedGrid : public Module
 	{
 	public:
 		/** Struct wich contains Hydrax projected grid module options

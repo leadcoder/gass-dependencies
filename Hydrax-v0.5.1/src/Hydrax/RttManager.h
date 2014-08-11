@@ -36,7 +36,7 @@ namespace Hydrax
 
 	/** Rtt's manager class
 	 */
-	class DllExport RttManager
+	class HydraxDllExport RttManager
 	{
 	public:
 		/** Rtt enumeration
@@ -86,7 +86,7 @@ namespace Hydrax
 
 		/** Rtt Listener class
 		 */
-		class DllExport RttListener
+		class HydraxDllExport RttListener
 		{
 		public:
 			/** Funtion that is called before the Rtt will render
@@ -300,7 +300,7 @@ namespace Hydrax
 	private:
 		/** RttManager::CRefractionListener class
 		 */
-		class DllExport CRefractionListener : public Ogre::RenderTargetListener
+		class HydraxDllExport CRefractionListener : public Ogre::RenderTargetListener
 		{
 		public:
 			/// Rtt manager pointer
@@ -324,7 +324,7 @@ namespace Hydrax
 
 		/** RttManager::CReflectionListener class
 		 */
-		class DllExport CReflectionListener : public Ogre::RenderTargetListener
+		class HydraxDllExport CReflectionListener : public Ogre::RenderTargetListener
 		{
 		public:
 			/** RttManager::CReflectionListener::CReflectionQueueListener class
@@ -371,7 +371,7 @@ namespace Hydrax
 
 		/** RttManager::CDepthListener class
 		 */
-		class DllExport CDepthListener : public Ogre::RenderTargetListener
+		class HydraxDllExport CDepthListener : public Ogre::RenderTargetListener
 		{
 		public:
 			/// Rtt manager pointer
@@ -398,7 +398,7 @@ namespace Hydrax
 
 		/** RttManager::CDepthReflectionListener class
 		 */
-		class DllExport CDepthReflectionListener : public Ogre::RenderTargetListener
+		class HydraxDllExport CDepthReflectionListener : public Ogre::RenderTargetListener
 		{
 		public:
 			/// Rtt manager pointer
@@ -425,7 +425,7 @@ namespace Hydrax
 
 		/** RttManager::CGPUNormalMapListener class
 		 */
-		class DllExport CGPUNormalMapListener : public Ogre::RenderTargetListener
+		class HydraxDllExport CGPUNormalMapListener : public Ogre::RenderTargetListener
 		{
 		public:
 			/// Rtt manager pointer

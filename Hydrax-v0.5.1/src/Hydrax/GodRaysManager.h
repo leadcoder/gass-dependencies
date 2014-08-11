@@ -37,7 +37,7 @@ namespace Hydrax
 	/** Underwater god rays manager class
 	    God rays 
 	 */
-	class DllExport GodRaysManager
+	class HydraxDllExport GodRaysManager
 	{
 	public:
 		/** God rays material enumeration
@@ -222,7 +222,7 @@ namespace Hydrax
 	private:
 		/** GodRaysManager::DepthMapListener class
 		 */
-		class DllExport DepthMapListener : public Ogre::RenderTargetListener
+		class HydraxDllExport DepthMapListener : public Ogre::RenderTargetListener
 		{
 		public:
 			/// God rays manager pointer

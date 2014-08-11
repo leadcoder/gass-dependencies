@@ -31,7 +31,7 @@ namespace Hydrax
 {
     /** Texture quality enumeration(2^n)
      */
-    DllExport enum TextureQuality
+    HydraxDllExport enum TextureQuality
     {
         TEX_QUA_2     = 2,
         TEX_QUA_4     = 4,
@@ -48,7 +48,7 @@ namespace Hydrax
     /** Hydrax flags to select components wich we want to use.
         0 for none, 1 for all.
      */
-    DllExport enum HydraxComponent
+    HydraxDllExport enum HydraxComponent
     {
         HYDRAX_COMPONENT_SUN        = 1 << 0,
         HYDRAX_COMPONENT_FOAM       = 1 << 1,

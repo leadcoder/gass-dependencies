@@ -33,7 +33,7 @@ namespace Hydrax{ namespace Noise
 	/** Base noise class, 
 	    Override it for create different ways of create water noise.
 	 */
-	class DllExport Noise
+	class HydraxDllExport Noise
 	{
 	public:
 		/** Constructor
