@@ -36,7 +36,7 @@ namespace Hydrax
 	/** Config file manager.
 	    Class to load/save all Hydrax options from/to a config file
 	 */
-	class DllExport CfgFileManager
+	class HydraxDllExport CfgFileManager
 	{
 	public:
 		/** Constructor

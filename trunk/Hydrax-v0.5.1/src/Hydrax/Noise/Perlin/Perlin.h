@@ -66,7 +66,7 @@ namespace Hydrax{ namespace Noise
 {
 	/** Perlin noise module class
 	 */
-	class DllExport Perlin : public Noise
+	class HydraxDllExport Perlin : public Noise
 	{
 	public:
 		/** Struct wich contains Perlin noise module options

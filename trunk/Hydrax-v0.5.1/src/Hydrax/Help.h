@@ -31,7 +31,7 @@ namespace Hydrax
 {
     /** Struct wich contains an especific width and height value
     */
-    struct DllExport Size
+    struct HydraxDllExport Size
     {
         /// Width value
         int Width;

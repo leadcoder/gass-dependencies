@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 set(LIB_NAME Hydrax)
+#set(LIB_TYPE SHARED)
 set(LIB_TYPE STATIC)
 
 project(${LIB_NAME})
@@ -28,15 +29,23 @@ file(GLOB_RECURSE SOURCE_FILES_CPP ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE SOURCE_FILES_H ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 set(ALL_SOURCE_FILES ${SOURCE_FILES_CPP} ${SOURCE_FILES_H})
 
+link_directories("${OGRE_DIR}/lib")
+
 add_library(
 	${LIB_NAME}
 	${LIB_TYPE}
 	${ALL_SOURCE_FILES}
 )
 
+set(PROJ_LINK_LIBRARIES optimized OgreMain 
+	debug OgreMain_d 
+	)
+target_link_libraries(${LIB_NAME} ${PROJ_LINK_LIBRARIES})
+
 add_definitions(-DHYDRAX_EXPORTS -DHYDRAX_LIB)
 
-INSTALL( FILES ${SOURCE_FILES_H} DESTINATION include/ )
+#INSTALL( FILES ${SOURCE_FILES_H} DESTINATION include/ )
+INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax DESTINATION include)
 install(TARGETS ${LIB_NAME}
   RUNTIME DESTINATION bin/debug CONFIGURATIONS Debug
   LIBRARY DESTINATION bin/debug CONFIGURATIONS Debug

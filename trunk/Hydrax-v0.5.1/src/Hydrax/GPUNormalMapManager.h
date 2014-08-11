@@ -36,7 +36,7 @@ namespace Hydrax
 
 	/** Class to manager GPU normal maps
 	 */
-	class DllExport GPUNormalMapManager
+	class HydraxDllExport GPUNormalMapManager
 	{
 	public:
 		/** Constructor

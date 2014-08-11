@@ -36,7 +36,7 @@ namespace Hydrax
 
 	/** Class for manager Normal maps.
 	 */
-	class DllExport TextureManager
+	class HydraxDllExport TextureManager
 	{
 	public:
 		/** Textures enumeration

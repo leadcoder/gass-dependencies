@@ -46,7 +46,7 @@ namespace Hydrax
 	    Hydrax is a plugin for the Ogre3D engine whose aim is rendering realistic water scenes.
 		Do not use two instances of the Hydrax class.
      */
-    class DllExport Hydrax
+    class HydraxDllExport Hydrax
     {
     public:
         /** Constructor
@@ -620,7 +620,7 @@ namespace Hydrax
 
         /** Device listener
 	     */
-	    class DllExport DeviceListener : public Ogre::RenderSystem::Listener
+	    class HydraxDllExport DeviceListener : public Ogre::RenderSystem::Listener
 	    {
 		public:
 			/// Hydrax manager pointer

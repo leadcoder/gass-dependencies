@@ -35,7 +35,7 @@ namespace Hydrax{ namespace Noise
 {
 	/** FFT noise module class
 	 */
-	class DllExport FFT : public Noise
+	class HydraxDllExport FFT : public Noise
 	{
 	public:
 		/** Struct wich contains fft noise module options

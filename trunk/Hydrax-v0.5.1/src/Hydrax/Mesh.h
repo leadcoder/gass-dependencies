@@ -37,7 +37,7 @@ namespace Hydrax
     /** Class wich contains all funtions/variables related to
         Hydrax water mesh
      */
-    class DllExport Mesh
+    class HydraxDllExport Mesh
     {
     public:
 		/** Vertex struct for position, normals and uv data.
