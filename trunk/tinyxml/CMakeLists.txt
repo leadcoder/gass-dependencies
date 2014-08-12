@@ -10,7 +10,7 @@ else()
 	set(SHARED_LIB_EXT so)
 endif()
 set(LIBRARY_OUTPUT_PATH lib/${CMAKE_BUILD_TYPE})
-
+set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
 include_directories(./)
 
 file(
