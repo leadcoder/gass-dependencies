@@ -416,6 +416,7 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 			//pmesh->areas[i] = geom->getMesh()->getAreas()[i];
 			pmesh->flags[i] = 0x01;
 
+
 			//std::cout << geom->getMesh()->getAreas()[i] << "\n";
 
 			/*	if (pmesh->areas[i] == LAND_COVER_DEFAULT ||
@@ -431,48 +432,48 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 			else if (pmesh->areas[i] == LAND_COVER_DOOR)
 			{
 			pmesh->flags[i] = SAMPLE_POLYFLAGS_WALK | SAMPLE_POLYFLAGS_DOOR;
-			}
 			}*/
-
-			dtNavMeshCreateParams params;
-			memset(&params, 0, sizeof(params));
-			params.verts = pmesh->verts;
-			params.vertCount = pmesh->nverts;
-			params.polys = pmesh->polys;
-			params.polyAreas = pmesh->areas;
-			params.polyFlags = pmesh->flags;
-			params.polyCount = pmesh->npolys;
-			params.nvp = pmesh->nvp;
-			params.detailMeshes = dmesh->meshes;
-			params.detailVerts = dmesh->verts;
-			params.detailVertsCount = dmesh->nverts;
-			params.detailTris = dmesh->tris;
-			params.detailTriCount = dmesh->ntris;
-			params.offMeshConVerts = geom->getOffMeshConnectionVerts();
-			params.offMeshConRad = geom->getOffMeshConnectionRads();
-			params.offMeshConDir = geom->getOffMeshConnectionDirs();
-			params.offMeshConAreas = geom->getOffMeshConnectionAreas();
-			params.offMeshConFlags = geom->getOffMeshConnectionFlags();
-			params.offMeshConUserID = geom->getOffMeshConnectionId();
-			params.offMeshConCount = geom->getOffMeshConnectionCount();
-			params.walkableHeight = m_AgentHeight;
-			params.walkableRadius = m_AgentRadius;
-			params.walkableClimb = m_AgentMaxClimb;
-			params.tileX = tx;
-			params.tileY = ty;
-			params.tileLayer = 0;
-			rcVcopy(params.bmin, pmesh->bmin);
-			rcVcopy(params.bmax, pmesh->bmax);
-			params.cs = cfg.cs;
-			params.ch = cfg.ch;
-			params.buildBvTree = true;
-
-			if (!dtCreateNavMeshData(&params, &navData, &navDataSize))
-			{
-				m_Ctx->log(RC_LOG_ERROR, "Could not build Detour navmesh.");
-				return 0;
-			}		
 		}
+
+		dtNavMeshCreateParams params;
+		memset(&params, 0, sizeof(params));
+		params.verts = pmesh->verts;
+		params.vertCount = pmesh->nverts;
+		params.polys = pmesh->polys;
+		params.polyAreas = pmesh->areas;
+		params.polyFlags = pmesh->flags;
+		params.polyCount = pmesh->npolys;
+		params.nvp = pmesh->nvp;
+		params.detailMeshes = dmesh->meshes;
+		params.detailVerts = dmesh->verts;
+		params.detailVertsCount = dmesh->nverts;
+		params.detailTris = dmesh->tris;
+		params.detailTriCount = dmesh->ntris;
+		params.offMeshConVerts = geom->getOffMeshConnectionVerts();
+		params.offMeshConRad = geom->getOffMeshConnectionRads();
+		params.offMeshConDir = geom->getOffMeshConnectionDirs();
+		params.offMeshConAreas = geom->getOffMeshConnectionAreas();
+		params.offMeshConFlags = geom->getOffMeshConnectionFlags();
+		params.offMeshConUserID = geom->getOffMeshConnectionId();
+		params.offMeshConCount = geom->getOffMeshConnectionCount();
+		params.walkableHeight = m_AgentHeight;
+		params.walkableRadius = m_AgentRadius;
+		params.walkableClimb = m_AgentMaxClimb;
+		params.tileX = tx;
+		params.tileY = ty;
+		params.tileLayer = 0;
+		rcVcopy(params.bmin, pmesh->bmin);
+		rcVcopy(params.bmax, pmesh->bmax);
+		params.cs = cfg.cs;
+		params.ch = cfg.ch;
+		params.buildBvTree = true;
+
+		if (!dtCreateNavMeshData(&params, &navData, &navDataSize))
+		{
+			m_Ctx->log(RC_LOG_ERROR, "Could not build Detour navmesh.");
+			return 0;
+		}		
+
 		int tileMemUsage = navDataSize/1024.0f;
 
 		m_Ctx->stopTimer(RC_TIMER_TOTAL);
