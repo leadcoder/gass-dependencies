@@ -52,6 +52,7 @@ if(BUILD_STATIC_LIBS)
 	set_target_properties(tinyxml2static PROPERTIES OUTPUT_NAME tinyxml2)
 endif(BUILD_STATIC_LIBS)
 add_library(tinyxml2 SHARED tinyxml2.cpp tinyxml2.h)
+set_target_properties(tinyxml2 PROPERTIES OUTPUT_NAME tinyxml2dynamic)
 set_target_properties(tinyxml2 PROPERTIES
         COMPILE_DEFINITIONS "TINYXML2_EXPORT"
 	VERSION "${GENERIC_LIB_VERSION}"
@@ -64,34 +65,23 @@ add_dependencies(test tinyxml2)
 add_dependencies(test ${TARGET_DATA_COPY})
 target_link_libraries(test tinyxml2)
 
-if(WIN32)
-	if(BUILD_STATIC_LIBS)
-		install(TARGETS tinyxml2 tinyxml2static	
-		  RUNTIME DESTINATION bin/debug CONFIGURATIONS Debug
-		  LIBRARY DESTINATION bin/debug CONFIGURATIONS Debug
-		  ARCHIVE DESTINATION lib/debug CONFIGURATIONS Debug)
-
-		install(TARGETS tinyxml2 tinyxml2static
-		  RUNTIME DESTINATION bin/release CONFIGURATIONS Release
-		  LIBRARY DESTINATION bin/release CONFIGURATIONS Release
-		  ARCHIVE DESTINATION lib/release CONFIGURATIONS Release)
-	else(BUILD_STATIC_LIBS)
-		install(TARGETS tinyxml2
-			RUNTIME DESTINATION bin/release CONFIGURATIONS Release
-			LIBRARY DESTINATION bin/release CONFIGURATIONS Release)
-	endif(BUILD_STATIC_LIBS)
-else(WIN32)
 if(BUILD_STATIC_LIBS)
 	install(TARGETS tinyxml2 tinyxml2static
-		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+		RUNTIME DESTINATION bin/Debug CONFIGURATIONS Debug
+		LIBRARY DESTINATION lib/Debug CONFIGURATIONS Debug
+		ARCHIVE DESTINATION lib/Debug CONFIGURATIONS Debug
+		) 
+		
+	install(TARGETS tinyxml2 tinyxml2static
+		RUNTIME DESTINATION bin/Relase CONFIGURATIONS Release
+		LIBRARY DESTINATION lib/Relase CONFIGURATIONS Release
+		ARCHIVE DESTINATION lib/Relase CONFIGURATIONS Release
+		) 
 else(BUILD_STATIC_LIBS)
 	install(TARGETS tinyxml2
 		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif(BUILD_STATIC_LIBS)
-endif(WIN32)
 install(FILES tinyxml2.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 foreach(p LIB INCLUDE)
