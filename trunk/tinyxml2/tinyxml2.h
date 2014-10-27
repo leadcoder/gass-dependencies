@@ -1686,6 +1686,12 @@ public:
         return false;
     }
 
+	// Added by Björn L
+	// Only set if LoadFile( const char* filename ) is used, not when LoadFile( FILE* ) is used.
+	const char* GetFileName() const { 
+		return (_filePath ? _filePath : ""); 
+	}
+
 private:
     XMLDocument( const XMLDocument& );	// not supported
     void operator=( const XMLDocument& );	// not supported
@@ -1704,6 +1710,8 @@ private:
     MemPoolT< sizeof(XMLComment) >	 _commentPool;
 
 	static const char* _errorNames[XML_ERROR_COUNT];
+
+	const char*	_filePath;
 };
 
 
