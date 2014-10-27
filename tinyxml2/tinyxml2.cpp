@@ -1615,7 +1615,8 @@ XMLDocument::XMLDocument( bool processEntities, Whitespace whitespace ) :
     _whitespace( whitespace ),
     _errorStr1( 0 ),
     _errorStr2( 0 ),
-    _charBuffer( 0 )
+    _charBuffer( 0 ),
+	_filePath( 0 )
 {
     _document = this;	// avoid warning about 'this' in initializer list
 }
@@ -1654,6 +1655,7 @@ void XMLDocument::Clear()
 
     delete [] _charBuffer;
     _charBuffer = 0;
+	_filePath = 0;
 }
 
 
@@ -1724,6 +1726,7 @@ XMLError XMLDocument::LoadFile( const char* filename )
         return _errorID;
     }
     LoadFile( fp );
+	_filePath = filename;
     fclose( fp );
     return _errorID;
 }
