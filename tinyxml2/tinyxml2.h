@@ -1711,7 +1711,7 @@ private:
 
 	static const char* _errorNames[XML_ERROR_COUNT];
 
-	const char*	_filePath;
+	char*	_filePath;
 };
 
 

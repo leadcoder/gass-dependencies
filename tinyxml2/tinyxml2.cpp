@@ -1642,6 +1642,8 @@ XMLDocument::~XMLDocument()
 		TIXMLASSERT( _commentPool.CurrentAllocs()   == _commentPool.Untracked() );
 	}
 #endif
+
+	delete[] _filePath;
 }
 
 
@@ -1655,6 +1657,8 @@ void XMLDocument::Clear()
 
     delete [] _charBuffer;
     _charBuffer = 0;
+
+	delete [] _filePath;
 	_filePath = 0;
 }
 
@@ -1726,7 +1730,8 @@ XMLError XMLDocument::LoadFile( const char* filename )
         return _errorID;
     }
     LoadFile( fp );
-	_filePath = filename;
+	_filePath = new char[strlen(filename)+1];
+	strcpy(_filePath, filename);
     fclose( fp );
     return _errorID;
 }
