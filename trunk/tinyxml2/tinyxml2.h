@@ -1505,8 +1505,14 @@ class TINYXML2_LIB XMLDocument : public XMLNode
     friend class XMLElement;
 public:
     /// constructor
-    XMLDocument( bool processEntities = true, Whitespace = PRESERVE_WHITESPACE );
-    ~XMLDocument();
+	XMLDocument( bool processEntities = true, Whitespace = PRESERVE_WHITESPACE );
+
+	// Added by Björn L
+	// Added optional filename parameter. Didn't modify original constructor with optional
+	// parameter in order to make update easier. Otherwise test cases etc need to be updated.
+	XMLDocument( char * filename, bool processEntities = true, Whitespace = PRESERVE_WHITESPACE );
+
+	~XMLDocument();
 
     virtual XMLDocument* ToDocument()				{
         return this;
@@ -1548,6 +1554,15 @@ public:
     	Returns XML_NO_ERROR (0) on success, or
     	an errorID.
     */
+
+	/** Added by Björn L
+
+		Load an XML file from disk using filename specified by _filePath.
+		Returns XML_NO_ERROR (0) on success, or	an errorID
+		
+	*/
+	XMLError LoadFile( );
+
     XMLError SaveFile( const char* filename, bool compact = false );
 
     /**
@@ -1558,6 +1573,16 @@ public:
     	an errorID.
     */
     XMLError SaveFile( FILE* fp, bool compact = false );
+
+	/** Added by Björn L
+		Save XML file to disk using filename specified by _filePath.
+		If _filePath isn't defined prior to call to SaveFile(), 
+		XML_ERROR_FILE_NOT_FOUND is returned. 
+
+		Otherwise returns XML_NO_ERROR (0) on success, or an errorID
+		
+	*/
+	XMLError SaveFile( );
 
     bool ProcessEntities() const		{
         return _processEntities;
