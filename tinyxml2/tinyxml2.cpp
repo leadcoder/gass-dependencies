@@ -1621,6 +1621,21 @@ XMLDocument::XMLDocument( bool processEntities, Whitespace whitespace ) :
     _document = this;	// avoid warning about 'this' in initializer list
 }
 
+XMLDocument::XMLDocument( char * filename, bool processEntities, Whitespace whitespace ) :
+	XMLNode( 0 ),
+	_writeBOM( false ),
+	_processEntities( processEntities ),
+	_errorID( XML_NO_ERROR ),
+	_whitespace( whitespace ),
+	_errorStr1( 0 ),
+	_errorStr2( 0 ),
+	_charBuffer( 0 ),
+	_filePath( filename )
+{
+	_document = this;	// avoid warning about 'this' in initializer list
+}
+
+
 
 XMLDocument::~XMLDocument()
 {
@@ -1782,6 +1797,13 @@ XMLError XMLDocument::LoadFile( FILE* fp )
     return _errorID;
 }
 
+XMLError XMLDocument::LoadFile( ) 
+{
+	if ( !_filePath)
+		return XMLError::XML_ERROR_FILE_NOT_FOUND;
+
+	return LoadFile( _filePath );
+}
 
 XMLError XMLDocument::SaveFile( const char* filename, bool compact )
 {
@@ -1801,6 +1823,14 @@ XMLError XMLDocument::SaveFile( FILE* fp, bool compact )
     XMLPrinter stream( fp, compact );
     Print( &stream );
     return _errorID;
+}
+
+XMLError XMLDocument::SaveFile( ) 
+{
+	if ( !_filePath)
+		return XMLError::XML_ERROR_FILE_NOT_FOUND;
+
+	return SaveFile( _filePath );
 }
 
 
