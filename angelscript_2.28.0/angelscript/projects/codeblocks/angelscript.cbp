@@ -19,6 +19,7 @@
 					<Add option="-Wall" />
 					<Add option="-fno-strict-aliasing" />
 					<Add option="-m32" />
+					<Add option="-fPIC" />
 					<Add option="-DANGELSCRIPT_EXPORT" />
 					<Add option="-DNDEBUG" />
 				</Compiler>
@@ -36,9 +37,13 @@
 					<Add option="-Wall" />
 					<Add option="-fno-strict-aliasing" />
 					<Add option="-m64" />
+					<Add option="-fPIC" />
 					<Add option="-DANGELSCRIPT_EXPORT" />
 					<Add option="-DNDEBUG" />
 				</Compiler>
+				<Linker>
+					<Add option="fPIC" />
+				</Linker>
 			</Target>
 		</Build>
 		<VirtualTargets>
