@@ -11,6 +11,11 @@ else()
 endif()
 set(LIBRARY_OUTPUT_PATH lib/${CMAKE_BUILD_TYPE})
 set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
+#if (LINUX) 
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC") 
+#endif() 
+
+
 include_directories(./)
 
 file(
