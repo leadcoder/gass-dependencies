@@ -1800,7 +1800,7 @@ XMLError XMLDocument::LoadFile( FILE* fp )
 XMLError XMLDocument::LoadFile( ) 
 {
 	if ( !_filePath)
-		return XMLError::XML_ERROR_FILE_NOT_FOUND;
+		return XML_ERROR_FILE_NOT_FOUND;
 
 	return LoadFile( _filePath );
 }
@@ -1828,7 +1828,7 @@ XMLError XMLDocument::SaveFile( FILE* fp, bool compact )
 XMLError XMLDocument::SaveFile( ) 
 {
 	if ( !_filePath)
-		return XMLError::XML_ERROR_FILE_NOT_FOUND;
+		return XML_ERROR_FILE_NOT_FOUND;
 
 	return SaveFile( _filePath );
 }
