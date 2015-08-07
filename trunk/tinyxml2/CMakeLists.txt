@@ -1,103 +1,1 @@
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-cmake_policy(VERSION 2.6)
-
-project(tinyxml2)
-include(GNUInstallDirs)
-#enable_testing()
-
-#CMAKE_BUILD_TOOL
-
-################################
-# set lib version here
-
-set(GENERIC_LIB_VERSION "2.2.0")
-set(GENERIC_LIB_SOVERSION "2")
-
-
-################################
-# Add common source 
-
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/.")
-
-
-
-################################
-# Add custom target to copy all data
-
-set(TARGET_DATA_COPY DATA_COPY)
-if(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
-	add_custom_target(
-		${TARGET_DATA_COPY}
-	 	COMMAND ${CMAKE_COMMAND} -E echo "In source build")
-else(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
-	make_directory(${CMAKE_CURRENT_BINARY_DIR}/resources/)
-	add_custom_target(
-		${TARGET_DATA_COPY}
-		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/dream.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/
-		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/empty.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/
-		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/utf8test.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/
-		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/utf8testverify.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/)
-endif(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})
-
-################################
-# Add definitions
-
-if(MSVC)
-	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif(MSVC)
-
-################################
-# Add targets
-set(BUILD_STATIC_LIBS ON CACHE BOOL "Set to ON to build static libraries")
-if(BUILD_STATIC_LIBS)
-	add_library(tinyxml2static STATIC tinyxml2.cpp tinyxml2.h)
-	set_target_properties(tinyxml2static PROPERTIES OUTPUT_NAME tinyxml2)
-
-#if (LINUX) 
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC") 
-#endif() 
-endif(BUILD_STATIC_LIBS)
-add_library(tinyxml2 SHARED tinyxml2.cpp tinyxml2.h)
-set_target_properties(tinyxml2 PROPERTIES OUTPUT_NAME tinyxml2dynamic)
-set_target_properties(tinyxml2 PROPERTIES
-        COMPILE_DEFINITIONS "TINYXML2_EXPORT"
-	VERSION "${GENERIC_LIB_VERSION}"
-	SOVERSION "${GENERIC_LIB_SOVERSION}")
-
-set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
-	
-add_executable(test xmltest.cpp)
-add_dependencies(test tinyxml2)
-add_dependencies(test ${TARGET_DATA_COPY})
-target_link_libraries(test tinyxml2)
-
-if(BUILD_STATIC_LIBS)
-	install(TARGETS tinyxml2 tinyxml2static
-		RUNTIME DESTINATION bin/Debug CONFIGURATIONS Debug
-		LIBRARY DESTINATION lib/Debug CONFIGURATIONS Debug
-		ARCHIVE DESTINATION lib/Debug CONFIGURATIONS Debug
-		) 
-		
-	install(TARGETS tinyxml2 tinyxml2static
-		RUNTIME DESTINATION bin/Release CONFIGURATIONS Release
-		LIBRARY DESTINATION lib/Release CONFIGURATIONS Release
-		ARCHIVE DESTINATION lib/Release CONFIGURATIONS Release
-		) 
-else(BUILD_STATIC_LIBS)
-	install(TARGETS tinyxml2
-		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-endif(BUILD_STATIC_LIBS)
-install(FILES tinyxml2.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
-foreach(p LIB INCLUDE)
-	set(var CMAKE_INSTALL_${p}DIR)
-	if(NOT IS_ABSOLUTE "${${var}}")
-		set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
-	endif()
-endforeach()
-
-configure_file(tinyxml2.pc.in tinyxml2.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-
-#add_test(test ${SAMPLE_NAME} COMMAND $<TARGET_FILE:${SAMPLE_NAME}>)
+cmake_minimum_required(VERSION 2.6 FATAL_ERROR)cmake_policy(VERSION 2.6)project(tinyxml2)include(GNUInstallDirs)#enable_testing()if(UNIX)  set(TINYXML2_CFLAGS -fPIC)endif(UNIX)#CMAKE_BUILD_TOOL################################# set lib version hereset(GENERIC_LIB_VERSION "2.2.0")set(GENERIC_LIB_SOVERSION "2")################################# Add common source include_directories("${CMAKE_CURRENT_SOURCE_DIR}/.")################################# Add custom target to copy all dataset(TARGET_DATA_COPY DATA_COPY)if(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})	add_custom_target(		${TARGET_DATA_COPY}	 	COMMAND ${CMAKE_COMMAND} -E echo "In source build")else(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})	make_directory(${CMAKE_CURRENT_BINARY_DIR}/resources/)	add_custom_target(		${TARGET_DATA_COPY}		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/dream.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/empty.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/utf8test.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/resources/utf8testverify.xml ${CMAKE_CURRENT_BINARY_DIR}/resources/)endif(${CMAKE_CURRENT_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_BINARY_DIR})################################# Add definitionsif(MSVC)	add_definitions(-D_CRT_SECURE_NO_WARNINGS)endif(MSVC)################################# Add targetsset(BUILD_STATIC_LIBS ON CACHE BOOL "Set to ON to build static libraries")if(BUILD_STATIC_LIBS)	add_library(tinyxml2static STATIC tinyxml2.cpp tinyxml2.h)	set_target_properties(tinyxml2static PROPERTIES OUTPUT_NAME tinyxml2)	set_property(TARGET ${objlib} PROPERTY POSITION_INDEPENDENT_CODE 1)endif(BUILD_STATIC_LIBS)add_library(tinyxml2 SHARED tinyxml2.cpp tinyxml2.h)if(UNIX)  set_target_properties(tinyxml2 PROPERTIES OUTPUT_NAME tinyxml2)else(UNIX)  set_target_properties(tinyxml2 PROPERTIES OUTPUT_NAME tinyxml2dynamic)endif(UNIX)set_target_properties(tinyxml2 PROPERTIES        COMPILE_DEFINITIONS "TINYXML2_EXPORT"	VERSION "${GENERIC_LIB_VERSION}"	SOVERSION "${GENERIC_LIB_SOVERSION}")set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")	add_executable(test0 xmltest.cpp)add_dependencies(test0 tinyxml2)add_dependencies(test0 ${TARGET_DATA_COPY})target_link_libraries(test0 tinyxml2)if(BUILD_STATIC_LIBS)	install(TARGETS tinyxml2 tinyxml2static		RUNTIME DESTINATION bin/Debug CONFIGURATIONS Debug		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug CONFIGURATIONS Debug		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug CONFIGURATIONS Debug		) 			install(TARGETS tinyxml2 tinyxml2static		RUNTIME DESTINATION bin/Release CONFIGURATIONS Release		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release CONFIGURATIONS Release		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release CONFIGURATIONS Release		) 	    else(BUILD_STATIC_LIBS)	      set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} ${TINYXML2_C_FLAGS})	install(TARGETS tinyxml2		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})endif(BUILD_STATIC_LIBS)install(FILES tinyxml2.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})foreach(p LIB INCLUDE)	set(var CMAKE_INSTALL_${p}DIR)	if(NOT IS_ABSOLUTE "${${var}}")		set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")	endif()endforeach()configure_file(tinyxml2.pc.in tinyxml2.pc @ONLY)configure_file(tinyxml2-debug.pc.in tinyxml2-debug.pc @ONLY)install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig CONFIGURATIONS Release)install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2-debug.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig CONFIGURATIONS Debug)#add_test(test0 ${SAMPLE_NAME} COMMAND $<TARGET_FILE:${SAMPLE_NAME}>)
