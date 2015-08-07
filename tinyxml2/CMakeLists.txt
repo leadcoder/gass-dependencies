@@ -5,6 +5,10 @@ project(tinyxml2)
 include(GNUInstallDirs)
 #enable_testing()
 
+if(UNIX)
+  set(TINYXML2_CFLAGS -fPIC)
+endif(UNIX)
+
 #CMAKE_BUILD_TOOL
 
 ################################
@@ -50,9 +54,14 @@ set(BUILD_STATIC_LIBS ON CACHE BOOL "Set to ON to build static libraries")
 if(BUILD_STATIC_LIBS)
 	add_library(tinyxml2static STATIC tinyxml2.cpp tinyxml2.h)
 	set_target_properties(tinyxml2static PROPERTIES OUTPUT_NAME tinyxml2)
+	set_property(TARGET ${objlib} PROPERTY POSITION_INDEPENDENT_CODE 1)
 endif(BUILD_STATIC_LIBS)
 add_library(tinyxml2 SHARED tinyxml2.cpp tinyxml2.h)
-set_target_properties(tinyxml2 PROPERTIES OUTPUT_NAME tinyxml2dynamic)
+if(UNIX)
+  set_target_properties(tinyxml2 PROPERTIES OUTPUT_NAME tinyxml2)
+else(UNIX)
+  set_target_properties(tinyxml2 PROPERTIES OUTPUT_NAME tinyxml2dynamic)
+endif(UNIX)
 set_target_properties(tinyxml2 PROPERTIES
         COMPILE_DEFINITIONS "TINYXML2_EXPORT"
 	VERSION "${GENERIC_LIB_VERSION}"
@@ -60,24 +69,25 @@ set_target_properties(tinyxml2 PROPERTIES
 
 set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
 	
-add_executable(test xmltest.cpp)
-add_dependencies(test tinyxml2)
-add_dependencies(test ${TARGET_DATA_COPY})
-target_link_libraries(test tinyxml2)
+add_executable(test0 xmltest.cpp)
+add_dependencies(test0 tinyxml2)
+add_dependencies(test0 ${TARGET_DATA_COPY})
+target_link_libraries(test0 tinyxml2)
 
 if(BUILD_STATIC_LIBS)
 	install(TARGETS tinyxml2 tinyxml2static
 		RUNTIME DESTINATION bin/Debug CONFIGURATIONS Debug
-		LIBRARY DESTINATION lib/Debug CONFIGURATIONS Debug
-		ARCHIVE DESTINATION lib/Debug CONFIGURATIONS Debug
+		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug CONFIGURATIONS Debug
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug CONFIGURATIONS Debug
 		) 
 		
 	install(TARGETS tinyxml2 tinyxml2static
 		RUNTIME DESTINATION bin/Release CONFIGURATIONS Release
-		LIBRARY DESTINATION lib/Release CONFIGURATIONS Release
-		ARCHIVE DESTINATION lib/Release CONFIGURATIONS Release
+		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release CONFIGURATIONS Release
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release CONFIGURATIONS Release
 		) 
-else(BUILD_STATIC_LIBS)
+	    else(BUILD_STATIC_LIBS)
+	      set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} ${TINYXML2_C_FLAGS})
 	install(TARGETS tinyxml2
 		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -92,6 +102,8 @@ foreach(p LIB INCLUDE)
 endforeach()
 
 configure_file(tinyxml2.pc.in tinyxml2.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+configure_file(tinyxml2-debug.pc.in tinyxml2-debug.pc @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig CONFIGURATIONS Release)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tinyxml2-debug.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig CONFIGURATIONS Debug)
 
-#add_test(test ${SAMPLE_NAME} COMMAND $<TARGET_FILE:${SAMPLE_NAME}>)
+#add_test(test0 ${SAMPLE_NAME} COMMAND $<TARGET_FILE:${SAMPLE_NAME}>)
