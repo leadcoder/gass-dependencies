@@ -90,11 +90,21 @@ dtNavMesh* TiledNavigationMeshBuilder::Build(InputGeom* geom)
 
 	// Max tiles and max polys affect how the tile IDs are caculated.
 	// There are 22 bits available for identifying a tile and a polygon.
-	int tileBits = rcMin((int)ilog2(nextPow2(tw*th)), 14);
-	if (tileBits > 14) tileBits = 14;
+	int tileBits = (int)ilog2(nextPow2(tw*th));
+	if (tileBits > 14) 
+	{
+		m_Ctx->log(RC_LOG_ERROR, "Tile bit limit reached: %d, max 14 bits (128x128 = 16384 tiles) Total number of requsted tiles: %d", tw*th);
+		return NULL;
+		//tileBits = 14;
+	}
 	int polyBits = 22 - tileBits;
 	int maxTiles = 1 << tileBits;
 	int maxPolysPerTile = 1 << polyBits;
+
+	m_Ctx->log(RC_LOG_PROGRESS, "Max number of tiles: %d", maxTiles);
+	m_Ctx->log(RC_LOG_PROGRESS, "Max number of polys per tile: %d", maxPolysPerTile);
+
+
 
 	dtNavMeshParams nm_params;
 	rcVcopy(nm_params.orig, bmin);
@@ -405,6 +415,11 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 			// The vertex indices are ushorts, and cannot point to more than 0xffff vertices.
 			m_Ctx->log(RC_LOG_ERROR, "Too many vertices per tile %d (max: %d).", pmesh->nverts, 0xffff);
 			return 0;
+		}
+
+		if(pmesh->npolys > pmesh->maxpolys)
+		{
+			m_Ctx->log(RC_LOG_ERROR, "Too many vertices polygons %d (max: %d).", pmesh->npolys, pmesh->maxpolys);
 		}
 
 		// Update poly flags from areas.
