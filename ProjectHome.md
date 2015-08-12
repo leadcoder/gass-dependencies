@@ -1,0 +1,1 @@
+Dependencies for GASS framework: https://code.google.com/p/gass
