@@ -23,13 +23,20 @@
 #endif
 
 using namespace tinyxml2;
+using namespace std;
 int gPass = 0;
 int gFail = 0;
 
 
 bool XMLTest (const char* testString, const char* expected, const char* found, bool echo=true, bool extraNL=false )
 {
-	bool pass = !strcmp( expected, found );
+	bool pass;
+	if ( !expected && !found )
+		pass = true;
+	else if ( !expected || !found )
+		pass = false;
+	else 
+		pass = !strcmp( expected, found );
 	if ( pass )
 		printf ("[pass]");
 	else
@@ -279,6 +286,8 @@ int main( int argc, const char ** argv )
 {
 	#if defined( _MSC_VER ) && defined( DEBUG )
 		_CrtMemCheckpoint( &startMemState );
+		// Enable MS Visual C++ debug heap memory leaks dump on exit
+		_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
 	#endif
 
 	#if defined(_MSC_VER) || defined(MINGW32) || defined(__MINGW32__)
@@ -292,14 +301,18 @@ int main( int argc, const char ** argv )
 		mkdir( "resources/out/", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	#endif
 
+	{
+		TIXMLASSERT( true );
+	}
+
 	if ( argc > 1 ) {
 		XMLDocument* doc = new XMLDocument();
 		clock_t startTime = clock();
 		doc->LoadFile( argv[1] );
-		clock_t loadTime = clock();
+ 		clock_t loadTime = clock();
 		int errorID = doc->ErrorID();
 		delete doc; doc = 0;
-		clock_t deleteTime = clock();
+ 		clock_t deleteTime = clock();
 
 		printf( "Test file '%s' loaded. ErrorID=%d\n", argv[1], errorID );
 		if ( !errorID ) {
@@ -860,10 +873,18 @@ int main( int argc, const char ** argv )
 
 	{
 		// Empty documents should return TIXML_XML_ERROR_PARSING_EMPTY, bug 1070717
-		const char* str = "    ";
+		const char* str = "";
 		XMLDocument doc;
 		doc.Parse( str );
 		XMLTest( "Empty document error", XML_ERROR_EMPTY_DOCUMENT, doc.ErrorID() );
+	}
+
+	{
+		// Documents with all whitespaces should return TIXML_XML_ERROR_PARSING_EMPTY, bug 1070717
+		const char* str = "    ";
+		XMLDocument doc;
+		doc.Parse( str );
+		XMLTest( "All whitespaces document error", XML_ERROR_EMPTY_DOCUMENT, doc.ErrorID() );
 	}
 
 	{
@@ -1152,7 +1173,11 @@ int main( int argc, const char ** argv )
 
     {
         XMLDocument doc;
+        XMLTest( "Document is initially empty", doc.NoChildren(), true );
+        doc.Clear();
+        XMLTest( "Empty is empty after Clear()", doc.NoChildren(), true );
         doc.LoadFile( "resources/dream.xml" );
+        XMLTest( "Document has something to Clear()", doc.NoChildren(), false );
         doc.Clear();
         XMLTest( "Document Clear()'s", doc.NoChildren(), true );
     }
@@ -1329,6 +1354,14 @@ int main( int argc, const char ** argv )
 		doc.Print();
 	}
 
+	{
+		// Test that it doesn't crash.
+		const char* xml = "<?xml version=\"1.0\"?><root><sample><field0><1</field0><field1>2</field1></sample></root>";
+		XMLDocument doc;
+		doc.Parse(xml);
+		doc.PrintError();
+	}
+
 #if 1
 		// the question being explored is what kind of print to use: 
 		// https://github.com/leethomason/tinyxml2/issues/63
@@ -1363,10 +1396,117 @@ int main( int argc, const char ** argv )
 		*/
 	}
 #endif
+    
+    {
+        // Issue #184
+        // If it doesn't assert, it passes. Caused by objects
+        // getting created during parsing which are then
+        // inaccessible in the memory pools.
+        {
+            XMLDocument doc;
+            doc.Parse("<?xml version=\"1.0\" encoding=\"UTF-8\"?><test>");
+        }
+        {
+            XMLDocument doc;
+            doc.Parse("<?xml version=\"1.0\" encoding=\"UTF-8\"?><test>");
+            doc.Clear();
+        }
+    }
+    
+    {
+        // If this doesn't assert in DEBUG, all is well.
+        tinyxml2::XMLDocument doc;
+        tinyxml2::XMLElement *pRoot = doc.NewElement("Root");
+        doc.DeleteNode(pRoot);
+    }
 
+	{
+		// Should not assert in DEBUG
+		XMLPrinter printer;
+	}
 
+	{
+		// Issue 291. Should not crash
+		const char* xml = "&#0</a>";
+		XMLDocument doc;
+		doc.Parse( xml );
 
-	// ----------- Performance tracking --------------
+		XMLPrinter printer;
+		doc.Print( &printer );
+	}
+	{
+		// Issue 299. Can print elements that are not linked in. 
+		// Will crash if issue not fixed.
+		XMLDocument doc;
+		XMLElement* newElement = doc.NewElement( "printme" );
+		XMLPrinter printer;
+		newElement->Accept( &printer );
+		// Delete the node to avoid possible memory leak report in debug output
+		doc.DeleteNode( newElement );
+	}
+	{
+		// Issue 302. Clear errors from LoadFile/SaveFile
+		XMLDocument doc;
+		XMLTest( "Issue 302. Should be no error initially", "XML_SUCCESS", doc.ErrorName() );
+		doc.SaveFile( "./no/such/path/pretty.xml" );
+		XMLTest( "Issue 302. Fail to save", "XML_ERROR_FILE_COULD_NOT_BE_OPENED", doc.ErrorName() );
+		doc.SaveFile( "./resources/out/compact.xml", true );
+		XMLTest( "Issue 302. Subsequent success in saving", "XML_SUCCESS", doc.ErrorName() );
+	}
+
+	{
+		// If a document fails to load then subsequent
+		// successful loads should clear the error
+		XMLDocument doc;
+		XMLTest( "Should be no error initially", false, doc.Error() );
+		doc.LoadFile( "resources/no-such-file.xml" );
+		XMLTest( "No such file - should fail", true, doc.Error() );
+
+		doc.LoadFile( "resources/dream.xml" );
+		XMLTest( "Error should be cleared", false, doc.Error() );
+	}
+
+	{
+		// Check that declarations are parsed only as the FirstChild
+	    const char* xml0 = "<?xml version=\"1.0\" ?>"
+	                       "   <!-- xml version=\"1.1\" -->"
+	                       "<first />";
+	    const char* xml1 = "<?xml version=\"1.0\" ?>"
+	                       "   <?xml version=\"1.1\" ?>"
+	                       "<first />";
+	    const char* xml2 = "<first />"
+	                       "<?xml version=\"1.0\" ?>";
+	    XMLDocument doc;
+	    doc.Parse(xml0);
+	    XMLTest("Test that the code changes do not affect normal parsing", doc.Error(), false);
+	    doc.Parse(xml1);
+	    XMLTest("Test that the second declaration throws an error", doc.ErrorID(), XML_ERROR_PARSING_DECLARATION);
+	    doc.Parse(xml2);
+	    XMLTest("Test that declaration after a child throws an error", doc.ErrorID(), XML_ERROR_PARSING_DECLARATION);
+	}
+
+    {
+	    // No matter - before or after successfully parsing a text -
+	    // calling XMLDocument::Value() causes an assert in debug.
+	    const char* validXml = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>"
+	                           "<first />"
+	                           "<second />";
+	    XMLDocument* doc = new XMLDocument();
+	    XMLTest( "XMLDocument::Value() returns null?", NULL, doc->Value() );
+	    doc->Parse( validXml );
+	    XMLTest( "XMLDocument::Value() returns null?", NULL, doc->Value() );
+	    delete doc;
+    }
+
+	{
+		XMLDocument doc;
+		for( int i = 0; i < XML_ERROR_COUNT; i++ ) {
+			doc.SetError( (XMLError)i, 0, 0 );
+			doc.ErrorName();
+		}
+	}
+
+    // ----------- Performance tracking --------------
 	{
 #if defined( _MSC_VER )
 		__int64 start, end, freq;
@@ -1417,12 +1557,10 @@ int main( int argc, const char ** argv )
 
 	#if defined( _MSC_VER ) &&  defined( DEBUG )
 		_CrtMemCheckpoint( &endMemState );
-		//_CrtMemDumpStatistics( &endMemState );
 
 		_CrtMemState diffMemState;
 		_CrtMemDifference( &diffMemState, &startMemState, &endMemState );
 		_CrtMemDumpStatistics( &diffMemState );
-		//printf( "new total=%d\n", gNewTotal );
 	#endif
 
 	printf ("\nPass %d, Fail %d\n", gPass, gFail);
