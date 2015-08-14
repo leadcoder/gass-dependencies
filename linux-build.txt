@@ -1,0 +1,40 @@
+#mkdir gass_dep
+#cd gass_dep
+#git clone https://github.com/leadcoder/gass-dependencies master
+#cd master
+
+#recast
+cd recast
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/recast/
+make install
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/recast/
+make install
+cd ..
+
+#tinyxml
+
+cd tinyxml
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/tinyxml/
+make install
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/tinyxml/
+make install
+cd ..
+
+#tinyxml2
+
+cd tinyxml2
+cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=OFF  -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/tinyxml2/
+make install
+cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/tinyxml2/
+make install
+
+
+#ODE
+
+cd ODE
+cmake -DCMAKE_BUILD_TYPE=Debug DCMAKE_BUILD_TYPE=Debu -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/ODE/
+make install
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/ODE/
+make install
+
+
