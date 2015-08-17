@@ -97,7 +97,7 @@ set(ANGELSCRIPT_HEADERS
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../include)
 
 add_definitions("-D_CRT_SECURE_NO_WARNINGS -DANGELSCRIPT_EXPORT -D_LIB")
-
+set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
 # Fix x64 issues on Linux
 if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "x86_64" AND NOT APPLE)
         add_definitions(-fPIC)
@@ -116,4 +116,12 @@ endif(MSVC)
 set(RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../../bin)
 
 add_subdirectory(../../../samples/game/projects/cmake/ ./game)
+
+install(TARGETS Angelscript
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib)
+
+install(FILES ${ANGELSCRIPT_HEADERS} DESTINATION include)
+
 
