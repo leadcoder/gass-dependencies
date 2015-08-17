@@ -37,7 +37,7 @@ set(CMAKE_FRAMEWORK_PATH ${CMAKE_FRAMEWORK_PATH} ${SKYX_DEP_SEARCH_PATH})
 #######################################################################
 
 # Find Boost, you can comment those lines if Ogre was not compiled using boost threads.
-set(Boost_USE_STATIC_LIBS TRUE)
+#set(Boost_USE_STATIC_LIBS TRUE)
 set(Boost_ADDITIONAL_VERSIONS "1.54" "1.47.0" "1.47" "1.46.0" "1.46" "1.45.0" "1.45" "1.44.0" "1.44" "1.43.0" "1.43" "1.42.0" "1.42" "1.41.0" "1.41" "1.40.0" "1.40" "1.39.0" "1.39" "1.38.0" "1.38" "1.37.0" "1.37" )
 # Uncomment bellow if Ogre was compiled with boost threading
 set(SKYX_BOOST_COMPONENTS thread date_time)
