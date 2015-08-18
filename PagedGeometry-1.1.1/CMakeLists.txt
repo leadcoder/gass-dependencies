@@ -5,17 +5,26 @@ set(LIB_TYPE STATIC)
 project(${LIB_NAME})
 set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
 #add_definitions()
+
 set(OGRE_DIR $ENV{OGRE_HOME} CACHE PATH "Ogre 3D folder")
-set(BOOST_DIR $ENV{BOOST_HOME} CACHE PATH "Boost folder")
-set (OGRE_SDK_INCLUDE_DIRS "${OGRE_DIR}/include/OGRE"
-		"${OGRE_DIR}/include/OGRE/Plugins/OctreeSceneManager")
+
+# Set where to find ogre Cmake files on unix
+if (UNIX)
+  #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "/usr/local/lib/OGRE/cmake/" "/usr/lib/OGRE/cmake/")
+   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OGRE_DIR}/CMake /usr/share/OGRE/cmake/modules)
+else (UNIX)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OGRE_DIR}/CMake)
+endif ()
+find_package(OGRE)
+
+#set(BOOST_DIR $ENV{BOOST_HOME} CACHE PATH "Boost folder")
 
 set(LIBRARY_OUTPUT_PATH lib/${CMAKE_BUILD_TYPE})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include 
 	${CMAKE_CURRENT_SOURCE_DIR}/source 
-	${OGRE_SDK_INCLUDE_DIRS}
-	${BOOST_DIR})
+	${OGRE_INCLUDE_DIR})
+	#${BOOST_DIR})
 
 file(GLOB_RECURSE SOURCE_FILES_CPP ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 file(GLOB SOURCE_FILES_H ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)

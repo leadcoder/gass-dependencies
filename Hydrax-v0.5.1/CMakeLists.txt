@@ -6,11 +6,19 @@ set(LIB_TYPE STATIC)
 project(${LIB_NAME})
 set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
 #add_definitions()
-set(OGRE_DIR $ENV{OGRE_HOME} CACHE PATH "Ogre 3D folder")
-set(BOOST_DIR $ENV{BOOST_HOME} CACHE PATH "Boost folder")
-set (OGRE_SDK_INCLUDE_DIRS "${OGRE_DIR}/include/OGRE"
-		"${OGRE_DIR}/include/OGRE/Plugins/OctreeSceneManager")
 
+set(OGRE_DIR $ENV{OGRE_HOME} CACHE PATH "Ogre 3D folder")
+
+# Set where to find ogre Cmake files on unix
+if (UNIX)
+  #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "/usr/local/lib/OGRE/cmake/" "/usr/lib/OGRE/cmake/")
+   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OGRE_DIR}/CMake /usr/share/OGRE/cmake/modules)
+else (UNIX)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OGRE_DIR}/CMake)
+endif ()
+
+find_package(OGRE)
+#set(BOOST_DIR $ENV{BOOST_HOME} CACHE PATH "Boost folder")
 set(LIBRARY_OUTPUT_PATH lib/${CMAKE_BUILD_TYPE})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include 
@@ -22,14 +30,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax/Noise
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax/Noise/FFT
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax/Noise/Perlin
-	${OGRE_SDK_INCLUDE_DIRS}
-	${BOOST_DIR})
+	${OGRE_INCLUDE_DIR})
+	#${BOOST_DIR})
 
 file(GLOB_RECURSE SOURCE_FILES_CPP ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE SOURCE_FILES_H ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 set(ALL_SOURCE_FILES ${SOURCE_FILES_CPP} ${SOURCE_FILES_H})
-
-link_directories("${OGRE_DIR}/lib")
 
 add_library(
 	${LIB_NAME}
@@ -37,16 +43,16 @@ add_library(
 	${ALL_SOURCE_FILES}
 )
 
-set(PROJ_LINK_LIBRARIES optimized OgreMain 
-	debug OgreMain_d 
+set(PROJ_LINK_LIBRARIES optimized "${OGRE_LIBRARY_DBG}" 
+	debug "${OGRE_LIBRARY_REL}" 
 	)
 target_link_libraries(${LIB_NAME} ${PROJ_LINK_LIBRARIES})
 
 add_definitions(-DHYDRAX_EXPORTS -DHYDRAX_LIB)
 
-#if (LINUX) 
+if (UNIX) 
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC") 
-#endif() 
+endif() 
 
 #INSTALL( FILES ${SOURCE_FILES_H} DESTINATION include/ )
 INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax DESTINATION include)
@@ -62,10 +68,9 @@ install(TARGETS ${LIB_NAME}
   ARCHIVE DESTINATION lib/release CONFIGURATIONS Release
   )
   
-  IF(MSVC)
+IF(MSVC)
   INSTALL(DIRECTORY ${PROJECT_BINARY_DIR}/lib/Debug
     DESTINATION lib
     FILES_MATCHING
-    PATTERN *.pdb
-)
+    PATTERN *.pdb)
 ENDIF(MSVC)
