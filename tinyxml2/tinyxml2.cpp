@@ -1925,12 +1925,15 @@ XMLError XMLDocument::LoadFile( const char* filename )
         SetError( XML_ERROR_FILE_NOT_FOUND, filename, 0 );
         return _errorID;
     }
+
+    LoadFile( fp );
+    fclose( fp );
+
+	//JH: need to save filepath here, LoadFile(fp) call Clear 
 	delete[] _filePath;
 	_filePath = new char[strlen(filename)+1];
 	strcpy(_filePath, filename);
 
-    LoadFile( fp );
-    fclose( fp );
     return _errorID;
 }
 
