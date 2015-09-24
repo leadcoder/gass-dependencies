@@ -104,7 +104,7 @@ DensityMap::DensityMap(TexturePtr map, MapChannel channel)
 			case CHANNEL_GREEN: channelOffset = 2; break;
 			case CHANNEL_BLUE: channelOffset = 1; break;
 			case CHANNEL_ALPHA: channelOffset = 0; break;
-			default: OGRE_EXCEPT(0, "Invalid channel", "GrassLayer::setDensityMap()"); break;
+			default: OGRE_EXCEPT(Exception::ERR_INTERNAL_ERROR, "Invalid channel", "GrassLayer::setDensityMap()"); break;
 		}
 
 		//And copy that channel into the density map
@@ -269,7 +269,7 @@ ColorMap::ColorMap(TexturePtr map, MapChannel channel)
 				channel = CHANNEL_RED;
 			break;
 		default:
-			OGRE_EXCEPT(0, "Unknown RenderSystem color format", "GrassLayer::setColorMap()");
+			OGRE_EXCEPT(Exception::ERR_INTERNAL_ERROR, "Unknown RenderSystem color format", "GrassLayer::setColorMap()");
 			break;
 	}
 
@@ -292,7 +292,7 @@ ColorMap::ColorMap(TexturePtr map, MapChannel channel)
 			case CHANNEL_GREEN: channelOffset = 2; break;
 			case CHANNEL_BLUE: channelOffset = 1; break;
 			case CHANNEL_ALPHA: channelOffset = 0; break;
-			default: OGRE_EXCEPT(0, "Invalid channel", "ColorMap::ColorMap()"); break;
+			default: OGRE_EXCEPT(Exception::ERR_INTERNAL_ERROR, "Invalid channel", "ColorMap::ColorMap()"); break;
 		}
 
 		//And copy that channel into the density map

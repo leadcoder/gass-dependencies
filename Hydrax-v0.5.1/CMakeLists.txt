@@ -15,10 +15,11 @@ if (UNIX)
    set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OGRE_DIR}/CMake /usr/share/OGRE/cmake/modules)
 else (UNIX)
   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${OGRE_DIR}/CMake)
+  set(BOOST_INCLUDE_DIR $ENV{BOOST_ROOT} CACHE PATH "Boost folder")
 endif ()
 
 find_package(OGRE)
-#set(BOOST_DIR $ENV{BOOST_HOME} CACHE PATH "Boost folder")
+
 set(LIBRARY_OUTPUT_PATH lib/${CMAKE_BUILD_TYPE})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include 
@@ -30,8 +31,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax/Noise
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax/Noise/FFT
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Hydrax/Noise/Perlin
-	${OGRE_INCLUDE_DIR})
-	#${BOOST_DIR})
+	${OGRE_INCLUDE_DIR}
+	${BOOST_INCLUDE_DIR})
 
 file(GLOB_RECURSE SOURCE_FILES_CPP ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE SOURCE_FILES_H ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
