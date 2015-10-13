@@ -78,6 +78,8 @@ Source/RakNetTime.h
 Source/NativeTypes.h
 )
 
+set(CMAKE_DEBUG_POSTFIX  "_d" CACHE STRING "add a postfix, usually d on windows")
+
 
 ADD_LIBRARY(RakNet STATIC ${RAKNET_SOURCES})
 

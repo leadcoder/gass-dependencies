@@ -4,7 +4,7 @@ include_directories(
  include
  ${MYGUI_SOURCE_DIR}/MyGUIEngine/include
  ${OGRE_INCLUDE_DIR}
- ${BOOST_INC_DIR}
+ ${Boost_INCLUDE_DIRS}
 )
 
 include(${PROJECTNAME}.list)
@@ -14,7 +14,7 @@ add_library(${PROJECTNAME} ${HEADER_FILES} ${SOURCE_FILES})
 add_dependencies(${PROJECTNAME} MyGUIEngine)
 
 target_link_libraries(${PROJECTNAME} ${OGRE_LIBRARIES})
-link_directories(${OGRE_LIB_DIR} ${BOOST_LIB_DIR})
+link_directories(${OGRE_LIB_DIR} ${Boost_LIBRARY_DIRS})
 
 install(FILES ${HEADER_FILES}
 	DESTINATION include/MYGUI

@@ -125,9 +125,9 @@ function(mygui_app PROJECTNAME SOLUTIONFOLDER)
 		include_directories(
 			${MYGUI_SOURCE_DIR}/Platforms/Ogre/OgrePlatform/include
 			${OGRE_INCLUDE_DIR}
-			${BOOST_INC_DIR}
+			${Boost_INCLUDE_DIRS}
 		)
-		link_directories(${OGRE_LIB_DIR} ${BOOST_LIB_DIR})
+		link_directories(${OGRE_LIB_DIR} ${Boost_LIBRARY_DIRS})
 	elseif(MYGUI_RENDERSYSTEM EQUAL 3)
 		include_directories(../../Common/Base/OpenGL)
 		add_definitions("-DMYGUI_OPENGL_PLATFORM")
