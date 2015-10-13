@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{d11662fb-4887-42bf-b16e-3b0ddde696d3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\_FindFirst.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsynchronousFileIO.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AutoRPC.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BitStream.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BitStream_NoTemplate.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CheckSum.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CommandParserInterface.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ConnectionGraph.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ConsoleServer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DataBlockEncryptor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DataCompressor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectoryDeltaTransfer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DS_BytePool.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DS_ByteQueue.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DS_HuffmanEncodingTree.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DS_Table.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EmailSender.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EncodeClassName.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EpochTimeToString.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ExtendedOverlappedPool.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FileList.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FileListTransfer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FileOperations.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FormatString.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FullyConnectedMesh.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FunctionThread.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Gen_RPC8.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GetTime.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GridSectorizer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\HTTPConnection.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InlineFunctor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Itoa.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightweightDatabaseClient.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightweightDatabaseCommon.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightweightDatabaseServer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LinuxStrings.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LogCommandParser.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MessageFilter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NatPunchthrough.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NetworkIDManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NetworkIDObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PacketConsoleLogger.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PacketFileLogger.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PacketLogger.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PluginInterface.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakMemoryOverride.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakNetCommandParser.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakNetStatistics.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakNetTransport.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakNetTypes.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakNetworkFactory.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakPeer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakSleep.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakString.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RakThread.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Rand.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ReadyEvent.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ReliabilityLayer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ReplicaManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ReplicaManager2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\rijndael.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Router.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RPCMap.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SHA1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SimpleMutex.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SocketLayer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StringCompressor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StringTable.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SuperFastHash.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SystemAddressList.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TableSerializer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TCPInterface.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TelnetTransport.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ThreadsafePacketLogger.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\_FindFirst.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsynchronousFileIO.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AutopatcherPatchContext.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AutopatcherRepositoryInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AutoRPC.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BigTypes.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BitStream.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BitStream_NoTemplate.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CheckSum.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ClientContextStruct.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CommandParserInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ConnectionGraph.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ConsoleServer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DataBlockEncryptor.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DataCompressor.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectoryDeltaTransfer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_BinarySearchTree.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_BPlusTree.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_BytePool.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_ByteQueue.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_Heap.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_HuffmanEncodingTree.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_HuffmanEncodingTreeFactory.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_HuffmanEncodingTreeNode.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_LinkedList.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_List.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_Map.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_MemoryPool.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_OrderedChannelHeap.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_OrderedList.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_Queue.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_QueueLinkedList.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_RangeList.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_Table.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_Tree.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DS_WeightedGraph.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EmailSender.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EpochTimeToString.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Export.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ExtendedOverlappedPool.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FileList.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FileListTransfer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FileListTransferCBInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FileOperations.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FormatString.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FullyConnectedMesh.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FunctionThread.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gen_RPC8.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GetTime.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GridSectorizer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\HTTPConnection.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InlineFunctor.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InternalPacket.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Itoa.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Kbhit.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightweightDatabaseClient.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightweightDatabaseCommon.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightweightDatabaseServer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LinuxStrings.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LogCommandParser.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageFilter.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageIdentifiers.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MTUSize.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NativeTypes.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NatPunchthrough.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NetworkIDManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NetworkIDObject.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PacketConsoleLogger.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PacketFileLogger.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PacketLogger.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PacketPool.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PacketPriority.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PluginInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakAssert.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakMemoryOverride.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetCommandParser.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetDefines.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetStatistics.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetTime.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetTransport.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetTypes.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetVersion.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakNetworkFactory.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakPeer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakPeerInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakSleep.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakString.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RakThread.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rand.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ReadyEvent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RefCountedObj.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ReliabilityLayer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Replica.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ReplicaEnums.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ReplicaManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ReplicaManager2.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rijndael-Boxes.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Rijndael.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Router.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RouterInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RPCMap.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RPCNode.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RSACrypt.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SHA1.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SimpleMutex.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SimpleTCPServer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SingleProducerConsumer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SocketLayer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StringCompressor.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StringTable.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SuperFastHash.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SystemAddressList.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TableSerializer.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TCPInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TelnetTransport.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThreadPool.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ThreadsafePacketLogger.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TransportInterface.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Types.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WindowsIncludes.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

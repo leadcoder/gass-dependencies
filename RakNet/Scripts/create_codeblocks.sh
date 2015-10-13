@@ -1,0 +1,1 @@
+./premake --target cb-gcc
