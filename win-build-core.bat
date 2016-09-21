@@ -41,8 +41,8 @@ devenv.exe makefile.sln /build "Release|x64"  /out "build_log.txt"
 devenv.exe makefile.sln /build "Debug|x64"  /out "build_log_d.txt"
 
 rem deploy
-xcopy x64\Release %INSTALL_ROOT%\tbb\lib\release /I /Y
-xcopy x64\Debug %INSTALL_ROOT%\tbb\lib\debug /I /Y
+xcopy x64\Release %INSTALL_ROOT%\tbb\lib /I /Y
+xcopy x64\Debug %INSTALL_ROOT%\tbb\lib /I /Y
 cd %SOURCE_ROOT% 
 xcopy tbb\include %INSTALL_ROOT%\tbb\include /I /Y /E
 
