@@ -3,14 +3,22 @@ rem BOOST_HOME for mygui pagedgeom skyx and hydrax
 rem FREETYPE_HOME for mygui
 rem OGRE_HOME for pagedgeom skyx and hydrax
 
-set INSTALL_ROOT=%cd%/gass-dep-install
+set INSTALL_ROOT=%cd%\gass-dep-install
 set SOURCE_ROOT=%cd%
-mkdir build
-cd build
 call "%VS140COMNTOOLS%vsvars32.bat"
 
 rem set MSVC_VER=Visual Studio 14 2015 Win64
 set MSVC_VER=Visual Studio 12 2013 Win64
+
+mkdir build
+cd build
+
+mkdir tinyxml2
+cd tinyxml2
+cmake -DCMAKE_INSTALL_LIBDIR=lib -G"%MSVC_VER%" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX:PATH=%INSTALL_ROOT%/tinyxml2/ %SOURCE_ROOT%/tinyxml2/
+devenv.exe tinyxml2.sln /build "Debug" /project INSTALL /out "build_log_d.txt"
+devenv.exe tinyxml2.sln /build "Release" /project INSTALL /out "build_log.txt"
+cd ..
 
 rem prereq env: freetype_home
 mkdir mygui
@@ -27,14 +35,6 @@ cd raknet
 cmake -DCMAKE_INSTALL_LIBDIR=lib -G"%MSVC_VER%" -DCMAKE_INSTALL_PREFIX:PATH=%INSTALL_ROOT%/raknet/ %SOURCE_ROOT%/raknet/
 devenv.exe RakNetStaticLib.sln /build "Debug" /project INSTALL /out "build_log_d.txt"
 devenv.exe RakNetStaticLib.sln /build "Release" /project INSTALL /out "build_log.txt"
-cd ..
-
-
-mkdir tinyxml2
-cd tinyxml2
-cmake -DCMAKE_INSTALL_LIBDIR=lib -G"%MSVC_VER%" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX:PATH=%INSTALL_ROOT%/tinyxml2/ %SOURCE_ROOT%/tinyxml2/
-devenv.exe tinyxml2.sln /build "Debug" /project INSTALL /out "build_log_d.txt"
-devenv.exe tinyxml2.sln /build "Release" /project INSTALL /out "build_log.txt"
 cd ..
 
 mkdir ODE
