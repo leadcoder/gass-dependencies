@@ -28,6 +28,7 @@ make install
 cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/tinyxml2/
 make install
 
+cd ..
 
 #ODE
 
@@ -36,5 +37,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug DCMAKE_BUILD_TYPE=Debu -DCMAKE_INSTALL_PREFIX:PAT
 make install
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../../gass-dep-install/ODE/
 make install
+
+cd ..
 
 

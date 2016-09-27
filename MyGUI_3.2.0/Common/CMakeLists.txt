@@ -51,16 +51,16 @@ elseif(MYGUI_RENDERSYSTEM EQUAL 2)
 	include_directories(
 		${MYGUI_SOURCE_DIR}/Platforms/Ogre/OgrePlatform/include
 		${OGRE_INCLUDE_DIR}
-		${BOOST_INC_DIR}
+		${Boost_INCLUDE_DIRS}
 	)
-	link_directories(${OGRE_LIB_DIR} ${BOOST_LIB_DIR})
+	link_directories(${OGRE_LIB_DIR} ${Boost_LIBRARY_DIRS})
 elseif(MYGUI_RENDERSYSTEM EQUAL 3)
 	mygui_add_base_manager_source(OpenGL)
 	add_definitions("-DMYGUI_OPENGL_PLATFORM")
 	include_directories(
 		${MYGUI_SOURCE_DIR}/Platforms/OpenGL/OpenGLPlatform/include
 		${OPENGL_INCLUDE_DIR}
-		${BOOST_INC_DIR}
+		${Boost_INCLUDE_DIRS}
 	)
 	link_directories(${OPENGL_LIB_DIR})
 elseif(MYGUI_RENDERSYSTEM EQUAL 4)

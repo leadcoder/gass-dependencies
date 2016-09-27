@@ -6,6 +6,7 @@ set (HEADER_FILES
   include/MyGUI_OpenGLTexture.h
   include/MyGUI_OpenGLRTTexture.h
   include/MyGUI_OpenGLVertexBuffer.h
+  include/MyGUI_OpenGLImageLoader.h
 )
 set (SOURCE_FILES
   include/GL/glew.c
@@ -33,6 +34,7 @@ SOURCE_GROUP("Header Files" FILES
   include/MyGUI_OpenGLTexture.h
   include/MyGUI_OpenGLRTTexture.h
   include/MyGUI_OpenGLVertexBuffer.h
+  include/MyGUI_OpenGLImageLoader.h
 )
 SOURCE_GROUP("" FILES
   CMakeLists.txt

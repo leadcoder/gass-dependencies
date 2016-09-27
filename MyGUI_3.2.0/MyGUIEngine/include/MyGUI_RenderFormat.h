@@ -81,9 +81,9 @@ namespace MyGUI
 		{
 			return a.value != b.value;
 		}
-
+		Enum value; //MOVED BY JH
 	private:
-		Enum value;
+		
 	};
 
 	struct MYGUI_EXPORT TextureUsage

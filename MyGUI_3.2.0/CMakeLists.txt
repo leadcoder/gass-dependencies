@@ -11,6 +11,10 @@ cmake_policy(SET CMP0003 NEW)
 
 project(MYGUI)
 
+find_package(Boost 1.46.1)
+message(boost inc ${Boost_INCLUDE_DIRS})
+message(boost lib ${Boost_LIBRARY_DIRS})
+
 # Include necessary submodules
 set(CMAKE_MODULE_PATH
 	"${MYGUI_SOURCE_DIR}/CMake"
@@ -24,8 +28,8 @@ include(PreprocessorUtils)
 set(MYGUI_TEMPLATES_DIR "${MYGUI_SOURCE_DIR}/CMake/Templates")
 set(MYGUI_WORK_DIR ${MYGUI_BINARY_DIR})
 
-set(BOOST_INC_DIR CACHE PATH "Path to boost includes")
-set(BOOST_LIB_DIR CACHE PATH "Path to boost libs")
+
+
 #####################################################################
 # Set up the basic build environment
 #####################################################################

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="raknet" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../Lib/raknet_d.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="Debug" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-fPIC" />
+					<Add option="-DDEBUG" />
+					<Add directory="../Source" />
+				</Compiler>
+				<Linker>
+					<Add directory="../Lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../Lib/raknet.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="Release" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O" />
+					<Add directory="../Source" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add directory="../Lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="../Source/AsynchronousFileIO.cpp" />
+		<Unit filename="../Source/AsynchronousFileIO.h" />
+		<Unit filename="../Source/AutoRPC.cpp" />
+		<Unit filename="../Source/AutoRPC.h" />
+		<Unit filename="../Source/AutopatcherPatchContext.h" />
+		<Unit filename="../Source/AutopatcherRepositoryInterface.h" />
+		<Unit filename="../Source/BigTypes.h" />
+		<Unit filename="../Source/BitStream.cpp" />
+		<Unit filename="../Source/BitStream.h" />
+		<Unit filename="../Source/BitStream_NoTemplate.cpp" />
+		<Unit filename="../Source/BitStream_NoTemplate.h" />
+		<Unit filename="../Source/CheckSum.cpp" />
+		<Unit filename="../Source/CheckSum.h" />
+		<Unit filename="../Source/ClientContextStruct.h" />
+		<Unit filename="../Source/CommandParserInterface.cpp" />
+		<Unit filename="../Source/CommandParserInterface.h" />
+		<Unit filename="../Source/ConnectionGraph.cpp" />
+		<Unit filename="../Source/ConnectionGraph.h" />
+		<Unit filename="../Source/ConsoleServer.cpp" />
+		<Unit filename="../Source/ConsoleServer.h" />
+		<Unit filename="../Source/DS_BPlusTree.h" />
+		<Unit filename="../Source/DS_BinarySearchTree.h" />
+		<Unit filename="../Source/DS_BytePool.cpp" />
+		<Unit filename="../Source/DS_BytePool.h" />
+		<Unit filename="../Source/DS_ByteQueue.cpp" />
+		<Unit filename="../Source/DS_ByteQueue.h" />
+		<Unit filename="../Source/DS_Heap.h" />
+		<Unit filename="../Source/DS_HuffmanEncodingTree.cpp" />
+		<Unit filename="../Source/DS_HuffmanEncodingTree.h" />
+		<Unit filename="../Source/DS_HuffmanEncodingTreeFactory.h" />
+		<Unit filename="../Source/DS_HuffmanEncodingTreeNode.h" />
+		<Unit filename="../Source/DS_LinkedList.h" />
+		<Unit filename="../Source/DS_List.h" />
+		<Unit filename="../Source/DS_Map.h" />
+		<Unit filename="../Source/DS_MemoryPool.h" />
+		<Unit filename="../Source/DS_OrderedChannelHeap.h" />
+		<Unit filename="../Source/DS_OrderedList.h" />
+		<Unit filename="../Source/DS_Queue.h" />
+		<Unit filename="../Source/DS_QueueLinkedList.h" />
+		<Unit filename="../Source/DS_RangeList.h" />
+		<Unit filename="../Source/DS_Table.cpp" />
+		<Unit filename="../Source/DS_Table.h" />
+		<Unit filename="../Source/DS_Tree.h" />
+		<Unit filename="../Source/DS_WeightedGraph.h" />
+		<Unit filename="../Source/DataBlockEncryptor.cpp" />
+		<Unit filename="../Source/DataBlockEncryptor.h" />
+		<Unit filename="../Source/DataCompressor.cpp" />
+		<Unit filename="../Source/DataCompressor.h" />
+		<Unit filename="../Source/DirectoryDeltaTransfer.cpp" />
+		<Unit filename="../Source/DirectoryDeltaTransfer.h" />
+		<Unit filename="../Source/EmailSender.cpp" />
+		<Unit filename="../Source/EmailSender.h" />
+		<Unit filename="../Source/EncodeClassName.cpp" />
+		<Unit filename="../Source/EpochTimeToString.cpp" />
+		<Unit filename="../Source/EpochTimeToString.h" />
+		<Unit filename="../Source/Export.h" />
+		<Unit filename="../Source/ExtendedOverlappedPool.cpp" />
+		<Unit filename="../Source/ExtendedOverlappedPool.h" />
+		<Unit filename="../Source/FileList.cpp" />
+		<Unit filename="../Source/FileList.h" />
+		<Unit filename="../Source/FileListTransfer.cpp" />
+		<Unit filename="../Source/FileListTransfer.h" />
+		<Unit filename="../Source/FileListTransferCBInterface.h" />
+		<Unit filename="../Source/FileOperations.cpp" />
+		<Unit filename="../Source/FileOperations.h" />
+		<Unit filename="../Source/FormatString.cpp" />
+		<Unit filename="../Source/FormatString.h" />
+		<Unit filename="../Source/FullyConnectedMesh.cpp" />
+		<Unit filename="../Source/FullyConnectedMesh.h" />
+		<Unit filename="../Source/FunctionThread.cpp" />
+		<Unit filename="../Source/FunctionThread.h" />
+		<Unit filename="../Source/Gen_RPC8.cpp" />
+		<Unit filename="../Source/Gen_RPC8.h" />
+		<Unit filename="../Source/GetTime.cpp" />
+		<Unit filename="../Source/GetTime.h" />
+		<Unit filename="../Source/GridSectorizer.cpp" />
+		<Unit filename="../Source/GridSectorizer.h" />
+		<Unit filename="../Source/HTTPConnection.cpp" />
+		<Unit filename="../Source/HTTPConnection.h" />
+		<Unit filename="../Source/InlineFunctor.cpp" />
+		<Unit filename="../Source/InlineFunctor.h" />
+		<Unit filename="../Source/InternalPacket.h" />
+		<Unit filename="../Source/Itoa.cpp" />
+		<Unit filename="../Source/Itoa.h" />
+		<Unit filename="../Source/Kbhit.h" />
+		<Unit filename="../Source/LightweightDatabaseClient.cpp" />
+		<Unit filename="../Source/LightweightDatabaseClient.h" />
+		<Unit filename="../Source/LightweightDatabaseCommon.cpp" />
+		<Unit filename="../Source/LightweightDatabaseCommon.h" />
+		<Unit filename="../Source/LightweightDatabaseServer.cpp" />
+		<Unit filename="../Source/LightweightDatabaseServer.h" />
+		<Unit filename="../Source/LinuxStrings.cpp" />
+		<Unit filename="../Source/LinuxStrings.h" />
+		<Unit filename="../Source/LogCommandParser.cpp" />
+		<Unit filename="../Source/LogCommandParser.h" />
+		<Unit filename="../Source/MTUSize.h" />
+		<Unit filename="../Source/MessageFilter.cpp" />
+		<Unit filename="../Source/MessageFilter.h" />
+		<Unit filename="../Source/MessageIdentifiers.h" />
+		<Unit filename="../Source/NatPunchthrough.cpp" />
+		<Unit filename="../Source/NatPunchthrough.h" />
+		<Unit filename="../Source/NativeTypes.h" />
+		<Unit filename="../Source/NetworkIDManager.cpp" />
+		<Unit filename="../Source/NetworkIDManager.h" />
+		<Unit filename="../Source/NetworkIDObject.cpp" />
+		<Unit filename="../Source/NetworkIDObject.h" />
+		<Unit filename="../Source/PacketConsoleLogger.cpp" />
+		<Unit filename="../Source/PacketConsoleLogger.h" />
+		<Unit filename="../Source/PacketFileLogger.cpp" />
+		<Unit filename="../Source/PacketFileLogger.h" />
+		<Unit filename="../Source/PacketLogger.cpp" />
+		<Unit filename="../Source/PacketLogger.h" />
+		<Unit filename="../Source/PacketPool.h" />
+		<Unit filename="../Source/PacketPriority.h" />
+		<Unit filename="../Source/PluginInterface.cpp" />
+		<Unit filename="../Source/PluginInterface.h" />
+		<Unit filename="../Source/RPCMap.cpp" />
+		<Unit filename="../Source/RPCMap.h" />
+		<Unit filename="../Source/RPCNode.h" />
+		<Unit filename="../Source/RSACrypt.h" />
+		<Unit filename="../Source/RakAssert.h" />
+		<Unit filename="../Source/RakMemoryOverride.cpp" />
+		<Unit filename="../Source/RakMemoryOverride.h" />
+		<Unit filename="../Source/RakNetCommandParser.cpp" />
+		<Unit filename="../Source/RakNetCommandParser.h" />
+		<Unit filename="../Source/RakNetDefines.h" />
+		<Unit filename="../Source/RakNetStatistics.cpp" />
+		<Unit filename="../Source/RakNetStatistics.h" />
+		<Unit filename="../Source/RakNetTime.h" />
+		<Unit filename="../Source/RakNetTransport.cpp" />
+		<Unit filename="../Source/RakNetTransport.h" />
+		<Unit filename="../Source/RakNetTypes.cpp" />
+		<Unit filename="../Source/RakNetTypes.h" />
+		<Unit filename="../Source/RakNetVersion.h" />
+		<Unit filename="../Source/RakNetworkFactory.cpp" />
+		<Unit filename="../Source/RakNetworkFactory.h" />
+		<Unit filename="../Source/RakPeer.cpp" />
+		<Unit filename="../Source/RakPeer.h" />
+		<Unit filename="../Source/RakPeerInterface.h" />
+		<Unit filename="../Source/RakSleep.cpp" />
+		<Unit filename="../Source/RakSleep.h" />
+		<Unit filename="../Source/RakString.cpp" />
+		<Unit filename="../Source/RakString.h" />
+		<Unit filename="../Source/RakThread.cpp" />
+		<Unit filename="../Source/RakThread.h" />
+		<Unit filename="../Source/Rand.cpp" />
+		<Unit filename="../Source/Rand.h" />
+		<Unit filename="../Source/ReadyEvent.cpp" />
+		<Unit filename="../Source/ReadyEvent.h" />
+		<Unit filename="../Source/RefCountedObj.h" />
+		<Unit filename="../Source/ReliabilityLayer.cpp" />
+		<Unit filename="../Source/ReliabilityLayer.h" />
+		<Unit filename="../Source/Replica.h" />
+		<Unit filename="../Source/ReplicaEnums.h" />
+		<Unit filename="../Source/ReplicaManager.cpp" />
+		<Unit filename="../Source/ReplicaManager.h" />
+		<Unit filename="../Source/ReplicaManager2.cpp" />
+		<Unit filename="../Source/ReplicaManager2.h" />
+		<Unit filename="../Source/Rijndael-Boxes.h" />
+		<Unit filename="../Source/Rijndael.h" />
+		<Unit filename="../Source/Router.cpp" />
+		<Unit filename="../Source/Router.h" />
+		<Unit filename="../Source/RouterInterface.h" />
+		<Unit filename="../Source/SHA1.cpp" />
+		<Unit filename="../Source/SHA1.h" />
+		<Unit filename="../Source/SimpleMutex.cpp" />
+		<Unit filename="../Source/SimpleMutex.h" />
+		<Unit filename="../Source/SimpleTCPServer.h" />
+		<Unit filename="../Source/SingleProducerConsumer.h" />
+		<Unit filename="../Source/SocketLayer.cpp" />
+		<Unit filename="../Source/SocketLayer.h" />
+		<Unit filename="../Source/StringCompressor.cpp" />
+		<Unit filename="../Source/StringCompressor.h" />
+		<Unit filename="../Source/StringTable.cpp" />
+		<Unit filename="../Source/StringTable.h" />
+		<Unit filename="../Source/SuperFastHash.cpp" />
+		<Unit filename="../Source/SuperFastHash.h" />
+		<Unit filename="../Source/SystemAddressList.cpp" />
+		<Unit filename="../Source/SystemAddressList.h" />
+		<Unit filename="../Source/TCPInterface.cpp" />
+		<Unit filename="../Source/TCPInterface.h" />
+		<Unit filename="../Source/TableSerializer.cpp" />
+		<Unit filename="../Source/TableSerializer.h" />
+		<Unit filename="../Source/TelnetTransport.cpp" />
+		<Unit filename="../Source/TelnetTransport.h" />
+		<Unit filename="../Source/ThreadPool.h" />
+		<Unit filename="../Source/ThreadsafePacketLogger.cpp" />
+		<Unit filename="../Source/ThreadsafePacketLogger.h" />
+		<Unit filename="../Source/TransportInterface.h" />
+		<Unit filename="../Source/Types.h" />
+		<Unit filename="../Source/WindowsIncludes.h" />
+		<Unit filename="../Source/_FindFirst.cpp" />
+		<Unit filename="../Source/_FindFirst.h" />
+		<Unit filename="../Source/rijndael.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
