@@ -88,12 +88,12 @@ dtNavMesh* TiledNavigationMeshBuilder::Build(InputGeom* geom)
 	const int tw = (gw + ts-1) / ts;
 	const int th = (gh + ts-1) / ts;
 
-	// Max tiles and max polys affect how the tile IDs are caculated.
+	// Max tiles and max polys affect how the tile IDs are calculated.
 	// There are 22 bits available for identifying a tile and a polygon.
 	int tileBits = (int)ilog2(nextPow2(tw*th));
 	if (tileBits > 14) 
 	{
-		m_Ctx->log(RC_LOG_ERROR, "Tile bit limit reached: %d, max 14 bits (128x128 = 16384 tiles) Total number of requsted tiles: %d", tw*th);
+		m_Ctx->log(RC_LOG_ERROR, "Tile bit limit reached: %d, max 14 bits (128x128 = 16384 tiles) Total number of requested tiles: %d (= %dx%d)", tileBits, tw*th, tw, th);
 		return NULL;
 		//tileBits = 14;
 	}
@@ -167,6 +167,8 @@ dtNavMesh* TiledNavigationMeshBuilder::Build(InputGeom* geom)
 	float totalBuildTimeMs = m_Ctx->getAccumulatedTime(RC_TIMER_TEMP)/1000.0f;
 	return nav_mesh;
 }
+
+int checker(int x, int y, int s) { return 4 + (((x/s)^(y/s)) & 1); }
 
 unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const int tx, const int ty, const float* bmin, const float* bmax, int& dataSize)
 {
@@ -319,6 +321,27 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 		return 0;
 	}
 
+
+	//Hack to tesselate mesh!
+	static unsigned char magic_num = 128;
+	int checker_size = cfg.maxEdgeLen;
+	if(checker_size > 0)
+	{
+		for (int y = 0; y < chf->height; ++y) {
+			for (int x = 0; x < chf->width; ++x) {
+				const rcCompactCell& c = chf->cells[x+y*chf->width];
+				//for (int i = (int)c.index, ni = (int)(c.index+c.count); i < ni; ++i) {
+				for (int i = (int)c.index, ni = (int)(c.index+c.count); i < ni; ++i) {
+					if (chf->areas[i] != RC_NULL_AREA && (((x/checker_size) ^ (y/checker_size)) & 1))
+						chf->areas[i] = chf->areas[i] + magic_num;
+					//chf->areas[i] = checker(x,y,checker_size);
+				}
+			}
+		}
+	}
+
+	
+
 	// (Optional) Mark areas.
 	const ConvexVolume* vols = geom->getConvexVolumes();
 	for (int i  = 0; i < geom->getConvexVolumeCount(); ++i)
@@ -349,6 +372,18 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 			return 0;
 		}
 	}
+
+	/*for (int y = 0; y < chf->height; ++y) {
+		for (int x = 0; x < chf->width; ++x) {
+			const rcCompactCell& c = chf->cells[x+y*chf->width];
+			//for (int i = (int)c.index, ni = (int)(c.index+c.count); i < ni; ++i) {
+			for (int i = (int)c.index, ni = (int)(c.index+c.count); i < ni; ++i) {
+				if (chf->areas[i] != RC_NULL_AREA)
+					chf->areas[i] = chf->areas[i] - (((x/checker_size)^(y/checker_size)) & 1);
+			}
+		}
+	}*/
+
 	// Create contours.
 	rcContourSet* cset = rcAllocContourSet();
 	if (!cset)
@@ -356,7 +391,8 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 		m_Ctx->log(RC_LOG_ERROR, "buildNavigation: Out of memory 'cset'.");
 		return 0;
 	}
-	if (!rcBuildContours(m_Ctx, *chf, cfg.maxSimplificationError, cfg.maxEdgeLen, *cset))
+	//if (!rcBuildContours(m_Ctx, *chf, cfg.maxSimplificationError, cfg.maxEdgeLen, *cset))
+	if (!rcBuildContours(m_Ctx, *chf, cfg.maxSimplificationError, 0, *cset)) //JH cfg.maxEdgeLen disabled  
 	{
 		m_Ctx->log(RC_LOG_ERROR, "buildNavigation: Could not create contours.");
 		return 0;
@@ -366,6 +402,8 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 	{
 		return 0;
 	}
+
+	
 
 	// Build polygon navmesh from the contours.
 
@@ -389,6 +427,24 @@ unsigned char* TiledNavigationMeshBuilder::BuildTileMesh(InputGeom* geom, const 
 		m_Ctx->log(RC_LOG_ERROR, "buildNavigation: Out of memory 'dmesh'.");
 		return 0;
 	}
+
+	//restore material ids
+	for (int i = 0; i < pmesh->npolys; ++i)
+	{
+		if (pmesh->areas[i] > magic_num-1)
+			pmesh->areas[i] = pmesh->areas[i]  - magic_num;
+	}
+
+	for (int y = 0; y < chf->height; ++y) {
+		for (int x = 0; x < chf->width; ++x) {
+			const rcCompactCell& c = chf->cells[x+y*chf->width];
+			for (int i = (int)c.index, ni = (int)(c.index+c.count); i < ni; ++i) {
+				if (chf->areas[i] > magic_num-1)
+					chf->areas[i] = chf->areas[i] - magic_num;
+			}
+		}
+	}
+
 
 	if (!rcBuildPolyMeshDetail(m_Ctx, *pmesh, *chf,
 		cfg.detailSampleDist, cfg.detailSampleMaxError,
