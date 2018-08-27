@@ -25,7 +25,7 @@
 #include "GetTime.h"
 #include <stdio.h>
 #include <string.h>
-
+//#include "RakNetTypes.h"
 #ifdef _MSC_VER
 #pragma warning( push )
 #endif
@@ -77,7 +77,12 @@ char* into, const char* dir, const char* type, unsigned int packet, unsigned int
 , const BitSize_t bitLen, unsigned long long time, const SystemAddress& local, const SystemAddress& remote,
 unsigned int splitPacketId, unsigned int splitPacketIndex, unsigned int splitPacketCount, unsigned int orderingIndex)
 {
-	sprintf(into, "%s%s,%s,%5u,%5u,%s,%u,%"PRINTF_TIME_MODIFIER"u,%u:%u,%u:%u,%i,%i,%i,%i,%s"
+#if defined(_MSC_VER) && _MSC_VER >= 1900
+#define FORMAT_LINE_STR "%s%s,%s,%5u,%5u,%s,%u,%" PRINTF_TIME_MODIFIER"u,%u:%u,%u:%u,%i,%i,%i,%i,%s"
+#else
+#define FORMAT_LINE_STR "%s%s,%s,%5u,%5u,%s,%u,%"PRINTF_TIME_MODIFIER"u,%u:%u,%u:%u,%i,%i,%i,%i,%s"
+#endif
+	sprintf(into, FORMAT_LINE_STR
 					, prefix
 					, dir
 					, type

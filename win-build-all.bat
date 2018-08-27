@@ -3,6 +3,7 @@ rem BOOST_HOME for mygui pagedgeom skyx and hydrax
 rem FREETYPE_HOME for mygui
 rem OGRE_HOME for pagedgeom skyx and hydrax
 
+rem set OGRE_HOME=D:/dev_zone/dependencies/MSVC2015/Ogre-v1.9
 set INSTALL_ROOT=%cd%\gass-dep-install
 set SOURCE_ROOT=%cd%
 
@@ -19,7 +20,7 @@ ECHO 3.MSVC 2013
 ECHO 4.MSVC 2015
 ECHO.
 
-CHOICE /C 123 /M "Enter your choice:"
+CHOICE /C 1234 /M "Enter your choice:"
 
 :: Note - list ERRORLEVELS in decreasing order
 IF ERRORLEVEL 4 GOTO MSVC2015
