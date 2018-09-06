@@ -3,14 +3,76 @@ rem BOOST_HOME for mygui pagedgeom skyx and hydrax
 rem FREETYPE_HOME for mygui
 rem OGRE_HOME for pagedgeom skyx and hydrax
 
-set INSTALL_ROOT=%cd%/gass-dep-install
+rem set OGRE_HOME=D:/dev_zone/dependencies/MSVC2015/Ogre-v1.9
+set INSTALL_ROOT=%cd%\gass-dep-install
 set SOURCE_ROOT=%cd%
+
+rem call "%VS140COMNTOOLS%vsvars32.bat"
+rem set MSVC_VER=Visual Studio 12 2013 Win64
+
+
+IF DEFINED MSVC_VER GOTO End
+@ECHO OFF
+CLS
+ECHO 1.MSVC 2010
+ECHO 2.MSVC 2012
+ECHO 3.MSVC 2013
+ECHO 4.MSVC 2015
+ECHO.
+
+CHOICE /C 1234 /M "Enter your choice:"
+
+:: Note - list ERRORLEVELS in decreasing order
+IF ERRORLEVEL 4 GOTO MSVC2015
+IF ERRORLEVEL 3 GOTO MSVC2013
+IF ERRORLEVEL 2 GOTO MSVC2012
+IF ERRORLEVEL 1 GOTO MSVC2010
+
+:MSVC2010
+	call "%VS100COMNTOOLS%vsvars32.bat"
+	set MSVC_VER=Visual Studio 10 Win64
+GOTO End
+
+:MSVC2012
+	call "%VS110COMNTOOLS%vsvars32.bat"
+	set MSVC_VER=Visual Studio 11 Win64
+GOTO End
+
+:MSVC2013
+	call "%VS120COMNTOOLS%vsvars32.bat"
+	set MSVC_VER=Visual Studio 12 2013 Win64
+GOTO End
+	
+:MSVC2015
+	call "%VS140COMNTOOLS%vsvars32.bat"
+	set MSVC_VER=Visual Studio 14 2015 Win64
+GOTO End
+:End
+ECHO Selected: %MSVC_VER%
+@ECHO ON
+
+
+rem -----------------TBB-------------------
+cd tbb\build\vs2012
+devenv.exe makefile.sln /upgrade
+devenv.exe makefile.sln /build "Release|x64"  /out "build_log.txt"
+devenv.exe makefile.sln /build "Debug|x64"  /out "build_log_d.txt"
+
+rem deploy
+xcopy x64\Release %INSTALL_ROOT%\tbb\lib /I /Y
+xcopy x64\Debug %INSTALL_ROOT%\tbb\lib /I /Y
+cd %SOURCE_ROOT% 
+xcopy tbb\include %INSTALL_ROOT%\tbb\include /I /Y /E
+
 mkdir build
 cd build
-call "%VS140COMNTOOLS%vsvars32.bat"
 
-rem set MSVC_VER=Visual Studio 14 2015 Win64
-set MSVC_VER=Visual Studio 12 2013 Win64
+mkdir tinyxml2
+cd tinyxml2
+cmake -DCMAKE_INSTALL_LIBDIR=lib -G"%MSVC_VER%" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX:PATH=%INSTALL_ROOT%/tinyxml2/ %SOURCE_ROOT%/tinyxml2/
+devenv.exe tinyxml2.sln /build "Debug" /project INSTALL /out "build_log_d.txt"
+devenv.exe tinyxml2.sln /build "Release" /project INSTALL /out "build_log.txt"
+cd ..
 
 rem prereq env: freetype_home
 mkdir mygui
@@ -27,14 +89,6 @@ cd raknet
 cmake -DCMAKE_INSTALL_LIBDIR=lib -G"%MSVC_VER%" -DCMAKE_INSTALL_PREFIX:PATH=%INSTALL_ROOT%/raknet/ %SOURCE_ROOT%/raknet/
 devenv.exe RakNetStaticLib.sln /build "Debug" /project INSTALL /out "build_log_d.txt"
 devenv.exe RakNetStaticLib.sln /build "Release" /project INSTALL /out "build_log.txt"
-cd ..
-
-
-mkdir tinyxml2
-cd tinyxml2
-cmake -DCMAKE_INSTALL_LIBDIR=lib -G"%MSVC_VER%" -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX:PATH=%INSTALL_ROOT%/tinyxml2/ %SOURCE_ROOT%/tinyxml2/
-devenv.exe tinyxml2.sln /build "Debug" /project INSTALL /out "build_log_d.txt"
-devenv.exe tinyxml2.sln /build "Release" /project INSTALL /out "build_log.txt"
 cd ..
 
 mkdir ODE

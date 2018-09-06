@@ -139,7 +139,7 @@ namespace common
 			res = _wfindnext( lHandle, &tagData );
 		}
 		// Close if we found any files
-4		if (lHandle != -1)
+		if (lHandle != -1)
 			_findclose(lHandle);
 #else
 		DIR* dir = opendir(MyGUI::UString(_folder).asUTF8_c_str());
