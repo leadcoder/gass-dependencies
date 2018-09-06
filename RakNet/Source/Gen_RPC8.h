@@ -436,6 +436,105 @@ typedef unsigned long long NaturalWord;
 
 #endif // AUTO_RPC_ALLOC_SEPARATE_FLOATS
 
+/// \internal
+/// functions to return the size of the item.
+template <class item>
+size_t D_size( item const ) { return sizeof( item ); }
+
+/// \internal
+/// functions to return the size of the item.
+template <class item>
+size_t D_size( item const*const ) { return sizeof( item ); }
+
+/// \internal
+/// functions to return the size of the item.
+template <class item>
+size_t D_size( item*const ) { return sizeof( item ); }
+
+/// \internal
+size_t D_size( char*const str );
+/// \internal
+size_t D_size( char const*const str );
+
+/// \internal
+enum {
+	// to maintain binary compatibility with a historical decision, bit 1 is not used
+	// in defining the "well known param" types
+	PARAM_TYPE_MASK = 0x5,
+	INT_PARAM   = 0,  // pass by value an integer or structure composed of integers.
+	REAL_PARAM  = 1,  // pass by value a SINGLE floating point parameter.
+	REF_PARAM   = 4,  // pass a pointer or reference to data which must be aligned.
+	STR_PARAM   = 5,  // pass a pointer to this data, which need not be unaligned;
+	// but MUST be null terminated.
+	// OBJECT_PARAM = 8, // TODO: pass by value an object, object id as first uint32_t of serialized data?
+	// OBJECT_REF_PARAM = 9, // TODO: pass by reference an object, object id as first uint32_t of serialized data?
+	// SC == "Shift count" (Bit index); which is always useful.
+	ENDIAN_SWAP_SC = 1,   DO_ENDIAN_SWAP = 1 << ENDIAN_SWAP_SC,
+
+	RESERVED_BITS = 0xf8,
+};
+
+/// \internal
+template <class item>
+unsigned D_type( item const )         { return INT_PARAM; }
+
+/// \internal
+template <class item>
+unsigned D_type( item const*const )   { return REF_PARAM; }
+
+/// \internal
+template <class item>
+unsigned D_type( item*const )         { return REF_PARAM; }
+
+/// \internal
+unsigned D_type( const char*const );
+/// \internal
+unsigned D_type( char*const );
+
+/// \internal
+unsigned D_type( float );
+/// \internal
+unsigned D_type( double );
+/// \internal
+unsigned D_type( long double );
+
+
+/// \internal
+template <class item>
+void Push( char*& p, item const i ) {
+	memcpy( (void*)p, (void*)&i, sizeof( i ) );
+	p += sizeof( i );
+}
+
+/// \internal
+template <class item>
+void Push( char*& p, item*const i) {
+	memcpy( (void*)p, (void*)i, sizeof( *i ) );
+	p += sizeof( *i );
+}
+
+/// \internal
+template <class item>
+void Push( char*& p, item const*const i) {
+	memcpy( (void*)p, (void*)i, sizeof( *i ) );
+	p += sizeof( *i );
+}
+
+/// \internal
+void Push( char*& p, char*const i);
+
+/// \internal
+void Push( char*& p, const char*const i );
+
+/// \internal
+template <class item>
+void PushHeader( char*& p, item const i, int endianSwap ) {
+	unsigned int   s = (unsigned int) D_size( i );
+	unsigned char  f = D_type( i ) | ( endianSwap << ENDIAN_SWAP_SC );
+	Push( p, s );
+	Push( p, f );
+}
+
 /// \internal 
 /// Writes number of parameters to push on the stack
 void SerializeHeader(char *&out, unsigned int numParams);
@@ -612,33 +711,6 @@ unsigned int BuildStack(char *stack, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P
 	return (unsigned int)(stackPtr-stack);
 }
 
-/// \internal
-template <class item>
-void Push( char*& p, item const i ) {
-	memcpy( (void*)p, (void*)&i, sizeof( i ) );
-	p += sizeof( i );
-}
-
-/// \internal
-template <class item>
-void Push( char*& p, item*const i) {
-	memcpy( (void*)p, (void*)i, sizeof( *i ) );
-	p += sizeof( *i );
-}
-
-/// \internal
-template <class item>
-void Push( char*& p, item const*const i) {
-	memcpy( (void*)p, (void*)i, sizeof( *i ) );
-	p += sizeof( *i );
-}
-
-/// \internal
-void Push( char*& p, char*const i);
-
-/// \internal
-void Push( char*& p, const char*const i );
-
 // THIS STRUCTURE LAYOUT IS HARDCODED INTO THE ASSEMBLY.  Unfortunately, that appears to be the
 // only way to do it.
 struct CallParams {
@@ -685,76 +757,10 @@ bool DeserializeParametersAndBuildCall(
 // Given the output of DeserializeParametersAndBuildCall, actually call a function
 bool CallWithStack( CallParams& call, void *functionPtr );
 
-/// \internal
-/// functions to return the size of the item.
-template <class item>
-size_t D_size( item const ) { return sizeof( item ); }
 
-/// \internal
-/// functions to return the size of the item.
-template <class item>
-size_t D_size( item const*const ) { return sizeof( item ); }
 
-/// \internal
-/// functions to return the size of the item.
-template <class item>
-size_t D_size( item*const ) { return sizeof( item ); }
 
-/// \internal
-size_t D_size( char*const str );
-/// \internal
-size_t D_size( char const*const str );
 
-/// \internal
-enum {
-	// to maintain binary compatibility with a historical decision, bit 1 is not used
-	// in defining the "well known param" types
-	PARAM_TYPE_MASK = 0x5,
-	INT_PARAM   = 0,  // pass by value an integer or structure composed of integers.
-	REAL_PARAM  = 1,  // pass by value a SINGLE floating point parameter.
-	REF_PARAM   = 4,  // pass a pointer or reference to data which must be aligned.
-	STR_PARAM   = 5,  // pass a pointer to this data, which need not be unaligned;
-	// but MUST be null terminated.
-	// OBJECT_PARAM = 8, // TODO: pass by value an object, object id as first uint32_t of serialized data?
-	// OBJECT_REF_PARAM = 9, // TODO: pass by reference an object, object id as first uint32_t of serialized data?
-	// SC == "Shift count" (Bit index); which is always useful.
-	ENDIAN_SWAP_SC = 1,   DO_ENDIAN_SWAP = 1 << ENDIAN_SWAP_SC,
-
-	RESERVED_BITS = 0xf8,
-};
-
-/// \internal
-template <class item>
-unsigned D_type( item const )         { return INT_PARAM; }
-
-/// \internal
-template <class item>
-unsigned D_type( item const*const )   { return REF_PARAM; }
-
-/// \internal
-template <class item>
-unsigned D_type( item*const )         { return REF_PARAM; }
-
-/// \internal
-unsigned D_type( const char*const );
-/// \internal
-unsigned D_type( char*const );
-
-/// \internal
-unsigned D_type( float );
-/// \internal
-unsigned D_type( double );
-/// \internal
-unsigned D_type( long double );
-
-/// \internal
-template <class item>
-void PushHeader( char*& p, item const i, int endianSwap ) {
-	unsigned int   s = (unsigned int) D_size( i );
-	unsigned char  f = D_type( i ) | ( endianSwap << ENDIAN_SWAP_SC );
-	Push( p, s );
-	Push( p, f );
-}
 
 }
 
